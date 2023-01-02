@@ -1,0 +1,68 @@
+<div class="card">
+    <div class="card-header">
+      <i class="i-Newspaper"></i> 
+     <span *ngIf="!reviewId" class="mx-2">إضافة رأي جديد </span>  
+     <span *ngIf="reviewId" class="mx-2">  تحديث رأي</span>  
+
+     </div>
+   
+    <div class="card-body">
+        <form [formGroup]="reviewsForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label>* الاسم</label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+                placeholder=" الاسم"
+              />
+              <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name'].errors['required']"> الاسم مطلوب</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>* الوصف</label>
+              <textarea class="form-control" formControlName="discription"  rows="3"
+              [ngClass]="{ 'is-invalid': submitted && f['discription'].errors }" ></textarea>
+              <div *ngIf="submitted && f['discription'].errors" class="invalid-feedback">
+                <div *ngIf="f['discription'].errors['required']"> الوصف مطلوب</div>
+              </div>
+            </div>
+
+
+            <div class="form-group">
+              <label>* الصورة</label>
+              <input
+              type="file"
+              formControlName="photo"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['photo'].errors }"
+              placeholder=" الاسم"
+              (change)="onFileChange($event)"  accept="image/*" />
+              <div *ngIf="submitted && f['photo'].errors" class="invalid-feedback">
+                <div *ngIf="f['photo'].errors['required']"> الصورة مطلوب</div>
+              </div>
+            </div>
+
+            <div *ngIf="reviewId">
+              <img [src]="viewImgUrl" alt="" style="height: 300px; width: 100%; " >
+            </div>
+      
+        
+            <div class="form-group">
+                <button *ngIf="!reviewId" type="submit" class="btn btn-primary my-2" (click)="addEditReview(0)">إضافة</button>
+                <button *ngIf="reviewId" type="submit" class="btn btn-primary my-2" (click)="addEditReview(reviewId)">تحديث</button>
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button>
+              </div>
+
+          </form>
+    </div>
+  </div>

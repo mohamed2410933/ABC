@@ -1,0 +1,74 @@
+<div class="">
+    <!-- <div class="breadcrumb">
+        <h1>الرئيسية 1</h1>
+        <ul>
+            <li><a href="">الرئيسية</a></li>
+            <li>Version 1</li>
+        </ul>
+    </div> -->
+
+    <!-- <div class="separator-breadcrumb border-top"></div> -->
+
+    <div class="row">
+        <div class="col-md-3 home-statistics">
+            <div class="card mb-4">
+              <div class="card-body card-icon-bg">
+                <h4 class="mb-3"  routerLink="/recommendationsManagement/reports"  >إجمالى الملفات المرفوعة</h4>
+                    
+                <i class="i-Upload"></i>
+                <p class="text-20 text-success line-height-1 my-3"> {{data?.filesCount}} </p>
+                  
+                <h5 class="text-info" routerLink="/recommendationsManagement/reports" > المزيد من التفاصيل </h5>
+              </div>
+            </div>
+          </div>
+        <div class="col-md-3 home-statistics" routerLink="/stockSettings/stocks">
+            <div class="card mb-4">
+              <div class="card-body card-icon-bg">
+                <h4 class="mb-3">إجمالى عدد الاسهم
+                </h4>
+                <i class="i-Line-Chart"></i>
+
+                <p class="text-20 text-success line-height-1 my-3"> {{data?.stockCount}}</p>
+                  
+                <h5 class="text-info" routerLink="/stockSettings/stocks"> المزيد من التفاصيل </h5>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-3 home-statistics" routerLink="/stockSettings/sectors">
+            <div class="card mb-4">
+              <div class="card-body card-icon-bg">
+                <h4 class="mb-3">إجمالى القطاعات
+                </h4>
+                <i class="i-Management"></i>
+    
+                <p class="text-20 text-success line-height-1 my-3"> {{data?.sectorCount}} </p>
+                  
+                <h5 class="text-info" routerLink="/stockSettings/sectors"> المزيد من التفاصيل </h5>
+              </div>
+            </div>
+          </div>
+        <div class="col-md-3 home-statistics" routerLink="/recommendationsManagement/all-recomondations">
+            <div class="card mb-4">
+              <div class="card-body card-icon-bg">
+                <h4 class="mb-3">إجمالى التوصيات
+                </h4>
+                <i class="i-Receipt-4"></i>
+    
+                <p class="text-20 text-success line-height-1 my-3" routerLink="/recommendationsManagement/all-recomondations"> {{data?.recommendationsCount}} </p>
+                  
+                <h5 class="text-info"> المزيد من التفاصيل </h5>
+              </div>
+            </div>
+          </div>
+      
+    </div>
+
+
+
+
+
+
+    
+</div>

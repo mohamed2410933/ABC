@@ -1,0 +1,175 @@
+
+
+<div class="breadcrumb">
+	<h1>إدارة المحتوي</h1>
+	<ul>
+		<li><a> جهات الاتصال</a></li>
+		<li></li>
+	</ul>
+</div>
+
+
+<div class="card">
+    <div class="card-header">
+    جهات الاتصال
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="contactsForm" (ngSubmit)="onSubmit()">
+          
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>رقم الموبيل</label>
+                    <input
+                      type="text"
+                      formControlName="mobile"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }"
+                      placeholder="أضف رقم الموبيل"
+                    />
+                    <div *ngIf="submitted && f['mobile'].errors" class="invalid-feedback">
+                      <div *ngIf="f['mobile'].errors['required']"> رقم الموبيل مطلوب</div>
+                    </div>
+                  </div>
+                <div class="form-group col">
+                    <label>العنوان</label>
+                    <input
+                      type="text"
+                      formControlName="address"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"
+                      placeholder="أضف العنوان"
+                    />
+                    <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                      <div *ngIf="f['address'].errors['required']"> العنوان مطلوب</div>
+                    </div>
+                  </div>
+              </div>
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>البريد الإلكترونى</label>
+                    <input
+                      type="text"
+                      formControlName="email"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                      placeholder="أضف البريد الألكترونى"
+                    />
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                      <div *ngIf="f['email'].errors['required']"> البريد الإلكترونى مطلوب</div>
+                    </div>
+                  </div>
+                  <div class="form-group col">
+                    <label>رقم الهاتف</label>
+                    <input
+                      type="text"
+                      formControlName="phone"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }"
+                      placeholder="أضف رقم الهاتف"
+                    />
+                    <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                      <div *ngIf="f['phone'].errors['required']"> رقم الهاتف مطلوب</div>
+                    </div>
+                  </div>
+              </div>
+
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>عنوان Facebook</label>
+                    <input
+                      type="text"
+                      formControlName="addresFacebook"
+                      class="form-control"
+                      placeholder="أضف عنوان صفحة الفيس بوك"
+                    />
+                    <!-- [ngClass]="{ 'is-invalid': submitted && f['addresFacebook'].errors }"
+                    <div *ngIf="submitted && f['addresFacebook'].errors" class="invalid-feedback">
+                      <div *ngIf="f['addresFacebook'].errors['required']"> عنوان Facebook مطلوب</div>
+                    </div> -->
+                  </div>
+                <div class="form-group col">
+                    <label>مواعيد العمل</label>
+                    <input
+                      type="text"
+                      formControlName="workTime"
+                      class="form-control"
+                      placeholder="أضف مواعيد العمل"
+                    />
+                    <!-- [ngClass]="{ 'is-invalid': submitted && f['workTime'].errors }"
+                    <div *ngIf="submitted && f['workTime'].errors" class="invalid-feedback">
+                      <div *ngIf="f['workTime'].errors['required']">  مواعيد العمل مطلوب</div>
+                    </div> -->
+                  </div>
+             
+              </div>
+
+
+
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>عنوان youtube</label>
+                    <input
+                      type="text"
+                      formControlName="addresYoutube"
+                      class="form-control"
+                      placeholder="أضف عنوان يوتيوب"
+                    />
+                    <!-- [ngClass]="{ 'is-invalid': submitted && f['addresYoutube'].errors }"
+                    <div *ngIf="submitted && f['addresYoutube'].errors" class="invalid-feedback">
+                      <div *ngIf="f['addresYoutube'].errors['required']">  عنوان youtube مطلوب</div>
+                    </div> -->
+                  </div>
+                <div class="form-group col">
+                    <label>عنوان Twiiter</label>
+                    <input
+                      type="text"
+                      formControlName="addresTwiter"
+                      class="form-control"
+                      placeholder="أضف عنوان صفحة تويتر"
+                    />
+                    <!-- [ngClass]="{ 'is-invalid': submitted && f['addresTwiter'].errors }"
+                    <div *ngIf="submitted && f['addresTwiter'].errors" class="invalid-feedback">
+                      <div *ngIf="f['addresTwiter'].errors['required']"> عنوان Twiiter مطلوب</div>
+                    </div> -->
+                  </div>
+              </div>
+
+
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>عنوان instagram</label>
+                    <input
+                      type="text"
+                      formControlName="addresInstagram"
+                      class="form-control"
+                      placeholder="أضف عنوان صفحة انستجرام"
+                    />
+                    <!-- [ngClass]="{ 'is-invalid': submitted && f['addresInstagram'].errors }"
+                    <div *ngIf="submitted && f['addresInstagram'].errors" class="invalid-feedback">
+                      <div *ngIf="f['addresInstagram'].errors['required']"> عنوان instagram مطلوب</div>
+                    </div> -->
+                  </div>
+          
+              </div>
+          
+          
+          
+
+
+           
+        
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary my-2" (click)="updateContacts()">تحديث</button>
+                <!-- <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button> -->
+              </div>
+
+          </form>
+    </div>
+  </div>

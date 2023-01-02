@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-header">
+        إضافة قطاع جديد
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="sectorForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label>اسم القطاع</label>
+              <input
+                type="text"
+                formControlName="sectorName"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['sectorName'].errors }"
+              />
+              <div *ngIf="submitted && f['sectorName'].errors" class="invalid-feedback">
+                <div *ngIf="f['sectorName'].errors['required']"> اسم القطاع مطلوب</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>بيانات عن القطاع</label>
+              <!-- <input
+                type="text"
+                formControlName="sectorData"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['sectorData'].errors }"
+              /> -->
+              <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+              <textarea class="form-control" formControlName="sectorData"  rows="3"></textarea>
+              <!-- <div *ngIf="submitted && f['sectorData'].errors" class="invalid-feedback">
+                <div *ngIf="f['sectorData'].errors['required']">وصف الخدمة مطلوب</div>
+              </div> -->
+            </div>
+        
+            <div class="form-group">
+                <!-- <button type="submit" class="btn btn-primary my-2">إضافة</button> -->
+                <button *ngIf="!sectorId" type="button" class="btn btn-primary my-2" (click)="addEditSector(0)">إضافة</button>
+                <button *ngIf="sectorId"  type="button" class="btn btn-primary my-2" (click)="addEditSector(sectorId)">تحديث</button>
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button>
+              </div>
+
+          </form>
+    </div>
+  </div>

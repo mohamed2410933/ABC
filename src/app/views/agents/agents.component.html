@@ -1,0 +1,160 @@
+<div class="col-md-12">
+  <div class="card mb-3">
+    <div class="card-body">
+      <div class="card-title mb-4 ">
+        <i class="i-Business-ManWoman"></i>
+        <span class="mx-2">العملاء</span>
+
+      </div>
+      <mat-chip class="mb-3 assign" (click)="getAllAgents() ; selectedItem= 0">
+        تعيين وكيل ل عملاء محتملين
+      </mat-chip>
+      <mat-chip-list aria-label="Dog selection">
+        <mat-chip class="sales-name" *ngFor="let item of membersList" (click)="toShowClientsForSales(item) ; setRow(item?.id)"     [ngClass]="{ 'selected': selectedItem == item.id }">
+          {{item?.name}}
+        </mat-chip>
+     
+      </mat-chip-list>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-2">
+   <button mat-raised-button  class="btn btn-primary my-2 w-100" (click)="assignCustomersToSales()">إضافة</button>
+    </div>
+    <div class="col-4 agent-ddl"  *ngIf="isShowChecbox">
+      <label for="">الوكيل</label>
+      <select class="form-select" 
+      (change)="getSaleId($event)"
+      >
+           <option value="" disabled selected>اختر</option>
+          <option [value]="item.id" *ngFor="let item of membersList">{{item?.name}}</option>
+      
+        </select>
+    </div>
+    <div class="col-4">
+      <div class="search-bar my-2 ml-auto ">
+        <input type="search" class="form-control" placeholder="بحث في الصفحة الحالية"  [(ngModel)]="filterData">
+    </div>
+    </div>
+    <div class="col-md-2 col-sm-12">
+      <button mat-raised-button  class="btn btn-primary my-2" (click)="getAllAgents(1,filterData)">بحث في كل الصفحات</button>
+     </div>
+    </div>
+  
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card o-hidden">
+        <ngx-datatable style="height: calc(160vh - 270px); box-shadow: none" [columnMode]="'force'" [headerHeight]="50"
+          [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [virtualization]="false" #table
+          [limit]="pageData?.per_page" [rows]="agentsList| fillter:filterData" class="material" [externalPaging]="true"
+          [count]="pageData?.total" [offset]="pageData?.current_page - 1"
+           (page)="getAllAgents($event.offset + 1)"
+           (activate)="onActivate($event)"
+           >
+
+          <ngx-datatable-column
+          *ngIf="isShowChecbox"
+            [width]="30"
+            [sortable]="false"
+            [canAutoResize]="false"
+            [draggable]="false"
+            [resizeable]="false"
+          >
+            <ng-template
+              ngx-datatable-cell-template
+              let-value="value"
+              let-isSelected="isSelected"
+              let-onCheckboxChangeFn="onCheckboxChangeFn"
+
+            >
+              <input type="checkbox" [checked]="isSelected"  (change)="onCheckboxChangeFn($event)" />
+            </ng-template>
+          </ngx-datatable-column>
+
+
+
+          <ngx-datatable-column name="name">
+            <ng-template ngx-datatable-header-template>
+            ID  
+            </ng-template>
+            <ng-template   let-value="value" let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+              <!-- {{row?.id }} -->
+              {{rowIndex+1}}
+          </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="name">
+            <ng-template ngx-datatable-header-template>
+              العميل 
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row?.name}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="name">
+            <ng-template ngx-datatable-header-template>
+              رقم التليفون
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row?.phone }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="name"  *ngIf="!isShowChecbox">
+            <ng-template ngx-datatable-header-template>
+             البريد الالكتروني
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row?.email }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="category">
+            <ng-template ngx-datatable-header-template>
+              تاريخ الإنشاء
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row.created_at | date }}
+            </ng-template>
+          </ngx-datatable-column>
+
+
+          <!-- <ngx-datatable-column name="name"  *ngIf="!isShowChecbox">
+            <ng-template ngx-datatable-header-template>
+              مفعل ؟!	
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row?.status }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="name"  *ngIf="!isShowChecbox">
+            <ng-template ngx-datatable-header-template>
+              الاستجابة	           
+             </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row?.response }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="name"  *ngIf="!isShowChecbox">
+            <ng-template ngx-datatable-header-template>
+              توضيح الاستجابة		           
+             </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row?.lastComment }}
+            </ng-template>
+          </ngx-datatable-column> -->
+
+
+
+
+
+       
+
+
+        </ngx-datatable>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

@@ -1,0 +1,76 @@
+<div class="card">
+    <div class="card-header">
+        إضافة مؤشر جديد
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="addReportForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label>* وصف المؤشر</label>
+              <textarea class="form-control" formControlName="discription"  rows="3"
+              [ngClass]="{ 'is-invalid': submitted && f['discription'].errors }" ></textarea>
+              <div *ngIf="submitted && f['discription'].errors" class="invalid-feedback">
+                <div *ngIf="f['discription'].errors['required']">  وصف المؤشر مطلوب</div>
+              </div>
+            </div>
+
+
+            <div class="form-group col" >
+              <label>* السوق</label>
+              <select class="form-select" 
+              [ngClass]="{ 'is-invalid': submitted && f['market_id'].errors }" 
+              formControlName="market_id">
+                  <option selected disabled>أختر</option>
+                  <option [value]="item.id" *ngFor="let item of MarketsList">{{item?.name}}</option>
+                </select>
+              <div *ngIf="submitted && f['market_id'].errors" class="invalid-feedback">
+                <div *ngIf="f['market_id'].errors['required']"> السوق مطلوب</div>
+              </div>
+            </div>
+
+
+              <div class="form-group">
+              <label>* أضف ملف</label>
+              <input
+              id="fileId"
+                type="file"
+                formControlName="addFile"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['addFile'].errors }"
+                (change)="onFileSelected()"  accept="application/pdf"  />
+              <div *ngIf="submitted && f['addFile'].errors" class="invalid-feedback">
+                <div *ngIf="f['addFile'].errors['required']">الملف مطلوب</div>
+              </div>
+            </div>
+         
+
+              <div class="form-group">
+              <label>* أضف صورة</label>
+              <input
+                type="file"
+                formControlName="AddImage"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['AddImage'].errors }"
+                (change)="onFileChange($event)" accept="image/*"
+              />
+              <div *ngIf="submitted && f['AddImage'].errors" class="invalid-feedback">
+                <div *ngIf="f['AddImage'].errors['required']">الصورة مطلوبة</div>
+              </div>
+            </div>
+        
+            <div class="form-group">
+              <button *ngIf="!reportId" type="button" class="btn btn-primary my-2" (click)="addEditReport(0)">إضافة</button>
+              <button *ngIf="reportId"  type="button" class="btn btn-primary my-2" (click)="addEditReport(reportId)">تحديث</button>
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button>
+              </div>
+
+          </form>
+    </div>
+  </div>
+

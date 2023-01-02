@@ -1,0 +1,134 @@
+
+<div class="card">
+    <div class="card-header">
+        اضافة باقة
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="addPackageForm" (ngSubmit)="onSubmit()">
+          
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>* اسم الباقة</label>
+                    <input
+                      type="text"
+                      formControlName="packageName"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['packageName'].errors }"
+                      placeholder="ادخل اسم الباقة"
+                    />
+                    <div *ngIf="submitted && f['packageName'].errors" class="invalid-feedback">
+                      <div *ngIf="f['packageName'].errors['required']">  اسم الباقة مطلوب</div>
+                    </div>
+                  </div>
+                  <div class="form-group col">
+                    <label>* الايام المتاحة حتي الانتهاء</label>
+                    <input
+                      type="number"
+                      formControlName="avaliabeDays"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['avaliabeDays'].errors }"
+                      placeholder="ادخل فترة الانتهاء"
+                    />
+                    <div *ngIf="submitted && f['avaliabeDays'].errors" class="invalid-feedback">
+                      <div *ngIf="f['avaliabeDays'].errors['required']"> فترة الانتهاء  مطلوبة</div>
+                    </div>
+                  </div>
+              </div>
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>* السعر</label>
+                    <input
+                      type="number"
+                      formControlName="price"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['price'].errors }"
+                      placeholder="ادخل السعر"
+                    />
+                    <div *ngIf="submitted && f['price'].errors" class="invalid-feedback">
+                      <div *ngIf="f['price'].errors['required']">  السعر مطلوب</div>
+                    </div>
+                  </div>
+                  <div class="form-group col" >
+                    <label>* السوق</label>
+                    <select class="form-select" 
+                    [ngClass]="{ 'is-invalid': submitted && f['market_id'].errors }" 
+                    formControlName="market_id">
+                        <option selected disabled>أختر</option>
+                        <option [value]="item.id" *ngFor="let item of MarketsList">{{item?.name}}</option>
+                      </select>
+                    <div *ngIf="submitted && f['market_id'].errors" class="invalid-feedback">
+                      <div *ngIf="f['market_id'].errors['required']"> السوق مطلوب</div>
+                    </div>
+                  </div>
+                
+              </div>
+
+            <div class="form-row row">
+           
+                <div class="form-group col">
+                    <label>* الوصف</label>
+                    <!-- <input
+                      type="text"
+                      formControlName="discription"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['discription'].errors }"
+                      placeholder="الوصف"
+                    /> -->
+                    <textarea class="form-control" formControlName="discription"  rows="3"></textarea>
+                    <div *ngIf="submitted && f['discription'].errors" class="invalid-feedback">
+                      <div *ngIf="f['discription'].errors['required']">  * الوصف مطلوب</div>
+                    </div>
+                  </div>
+              </div>
+            <div class="form-row row">
+                <div class="form-group col">
+                    <input
+                    class="hide-package"
+                    type="checkbox"
+                    formControlName="isShow"
+                  />
+                  <label class="mx-2"> إظهار الباقة</label>
+                 
+                  </div>
+              </div>
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>* الصوره</label>
+                    <input
+                    type="file"
+                    formControlName="photo"
+                    class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f['photo'].errors }"
+                    (change)="onFileChange($event)" accept="image/*" />
+                  <div *ngIf="submitted && f['photo'].errors" class="invalid-feedback">
+                    <div *ngIf="f['photo'].errors['required']">  * الصوره مطلوبة</div>
+                  </div>
+                  </div>
+              </div>
+            <div class="form-row row" *ngIf="packageId">
+                <div class="form-group col">
+                  <div class="card mb-3" style="height:27vh;">
+                    <img class="card-img-top" [src]="imgUrl" alt="Card image cap" style="height:30vh;">
+                    <div class="card-body">
+                      <!-- <h5 class="card-title">Card title</h5> -->
+                      <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p> -->
+                      <!-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                    </div>
+                  </div>
+                  </div>
+              </div>
+            <div class="form-group">
+              <button *ngIf="!packageId" type="button" class="btn btn-primary my-2" (click)="addEditPackage(0)">إضافة</button>
+              <button *ngIf="packageId"  type="button" class="btn btn-primary my-2" (click)="addEditPackage(packageId)">تحديث</button>
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button>
+              </div>
+          </form>
+    </div>
+  </div>

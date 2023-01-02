@@ -1,0 +1,184 @@
+<div class="">
+    <div class="breadcrumb">
+      <h1>إدارة التوصيات</h1>
+      <ul>
+        <li><a>كل التوصيات</a></li>
+        <li></li>
+      </ul>
+    </div>
+  
+    <div class="separator-breadcrumb border-top"></div>
+  
+    <div class="row">
+      <!-- {{userInfo?.roleId}} -->
+      <div class="col-2" *ngIf="userInfo?.roleId !== 5 && userInfo?.roleId !== 4">
+       <a routerLink="/recommendationsManagement/all-recomondations/operations/new"><button mat-raised-button  class="btn btn-primary my-2">إضافة جديدة</button></a>
+      </div>
+      <div class="col-6">
+        <div class="search-bar my-2 ml-auto ">
+          <input type="search" class="form-control" placeholder="بحث في الصفحة الحالية"  [(ngModel)]="filterData">
+      </div>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <button mat-raised-button  class="btn btn-primary my-2" (click)="getAllRecommendations(1,filterData)">بحث في كل الصفحات</button>
+       </div>
+      </div>
+  
+  
+      <div class="row">
+        <div class="col-md-12">
+            <div class="card o-hidden">
+              <ngx-datatable
+              style="height: calc(160vh - 270px); box-shadow: none"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50" 
+              [rowHeight]="50" 
+              [scrollbarV]="true"
+              [virtualization]="false"
+              [scrollbarH]="true"
+              #table
+              [limit]="pageData?.per_page" 
+              [rows]="RecommendationsList| fillter:filterData"
+              class="material"
+              [externalPaging]="true"
+              [count]="pageData?.total"
+              [offset]="pageData?.current_page - 1"
+              (page)="getAllRecommendations($event.offset + 1)" 
+              >
+            
+              <ngx-datatable-column name="name" [width]="80">
+                <ng-template ngx-datatable-header-template>
+                  ID
+                </ng-template>
+                <ng-template   let-value="value" let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <!-- {{row?.id }} -->
+                  {{rowIndex+1}}
+              </ng-template>
+              </ngx-datatable-column>
+                <ngx-datatable-column name="name" >
+                  <ng-template ngx-datatable-header-template>
+                    كود السهم
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.stock?.code }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="name" >
+                  <ng-template ngx-datatable-header-template>
+                    القطاع
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.stock?.sector }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    السهم
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.stock?.name }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    قائمة الشرعية	
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.stock?.type }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    تاريخ الإنشاء	
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.created_at | date }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    سعر الشراء	
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.purchasing_price }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    سعر البيع	
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.selling_price }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    سعر وقف خسائر	
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.stop_loss_price }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    حالة التوصية	
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.condition }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                        تاريخ التحقيق
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.verification_date | date }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="subtitle">
+                  <ng-template ngx-datatable-header-template>
+                    نوع التوصية	
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.recommendationType}}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="subtitle">
+                  <ng-template ngx-datatable-header-template>
+                   السوق
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.market[0]?.name}}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="subtitle">
+                  <ng-template ngx-datatable-header-template>
+                    التوصية ذهبية
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.is_golden == 'Golden' ? 'نعم' : 'لا'}}
+                </ng-template>
+                </ngx-datatable-column>
+    
+                <ngx-datatable-column name="operations" *ngIf="userInfo?.roleId !== 5 && userInfo?.roleId !== 4 ">
+                  <ng-template ngx-datatable-header-template>
+                    خيارات
+                  </ng-template>
+                  <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
+                  ngx-datatable-cell-template>      
+                  <button type="button" class="btn btn-primary btn-rounded m-1" (click)="toEditRecomondation(row.id)" >
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-rounded m-1" (click)="deleteSector(row.id , rowIndex)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </ng-template>
+                </ngx-datatable-column>
+    
+               
+              </ngx-datatable>
+            </div>
+        </div>
+      </div>
+  </div>  

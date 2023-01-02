@@ -1,0 +1,66 @@
+<div class="card">
+    <div class="card-header" *ngIf="!AdvantageId">
+        إضافة ميزة جديدة
+    </div>
+    <div class="card-header" *ngIf="AdvantageId">
+        تعديل الميزة 
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="ourAdvantagesForm">
+            <div class="form-group">
+              <label>الميزة</label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+              />
+              <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+                <div *ngIf="f['name'].errors['required']"> الميزة مطلوبة</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>وصف الميزة</label>
+              <!-- <input
+                type="text"
+                formControlName="serviceDiscription"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['serviceDiscription'].errors }"
+              /> -->
+              <!-- <textarea name="" id="" cols="30" rows="10"></textarea> -->
+              <textarea class="form-control" formControlName="description"  rows="3"></textarea>
+              <div *ngIf="submitted && f['description'].errors" class="invalid-feedback">
+                <div *ngIf="f['description'].errors['required']">وصف الميزة مطلوب</div>
+              </div>
+            </div>
+            <div class="form-group col">
+              <label>* الحالة</label>
+              <select class="form-select" 
+              [ngClass]="{ 'is-invalid': submitted && f['status'].errors }" 
+              formControlName="status">
+                  <option selected disabled>أختر</option>
+                  <!-- <option [value]="item.id" *ngFor="let item of PackagesList">{{item?.name}}</option> -->
+              <option value="active">نشر</option>
+              <option value="dis-active">عدم النشر</option>
+                </select>
+              <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
+                <div *ngIf="f['status'].errors['required']"> الحالة مطلوبة</div>
+              </div>
+            </div>
+        
+            <div class="form-group">
+                <button *ngIf="!AdvantageId" type="button" class="btn btn-primary my-2" (click)="addEditAdvantages(0)">إضافة</button>
+                <button *ngIf="AdvantageId"  type="button" class="btn btn-primary my-2" (click)="addEditAdvantages(AdvantageId)">تحديث</button>
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button>
+              </div>
+
+          </form>
+    </div>
+  </div>

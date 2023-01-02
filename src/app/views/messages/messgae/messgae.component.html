@@ -1,0 +1,124 @@
+<div class="">
+    <div class="breadcrumb">
+      <i class="i-Newspaper"></i> 
+
+      <h1 class="mx-2">الرسائل الواردة</h1>
+
+      <ul>
+        <!-- <li><a href="#"></a></li> -->
+        <!-- <li>الأعضاء </li> -->
+      </ul>
+    </div>
+  
+    <div class="separator-breadcrumb border-top"></div>
+  
+    <div class="row">
+      <div class="col-6">
+        <div class="search-bar my-2 ml-auto ">
+          <input type="search" class="form-control" placeholder="بحث في الصفحة الحالية"  [(ngModel)]="filterData">
+      </div>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <button mat-raised-button  class="btn btn-primary my-2" (click)="getAllMesssages(1,filterData)">بحث في كل الصفحات</button>
+       </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-12">
+            <div class="card o-hidden">
+              <ngx-datatable
+            
+              
+              style="height: calc(160vh - 270px); box-shadow: none"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50" 
+              [rowHeight]="50" 
+              [scrollbarV]="true"
+              [scrollbarH]="true"
+              [virtualization]="false"
+              #table
+              [limit]="pageData?.per_page" 
+              [rows]="MessagesList| fillter:filterData"
+              class="material"
+              [externalPaging]="true"
+              [count]="pageData?.total"
+              [offset]="pageData?.current_page - 1"
+              (page)="getAllMesssages($event.offset + 1)"
+              >
+
+      
+              <ngx-datatable-column name="name"  [width]="40">
+                <ng-template ngx-datatable-header-template>
+               ID
+                </ng-template>
+                <ng-template   let-value="value" let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <!-- {{row?.id }} -->
+                  {{rowIndex+1}}
+              </ng-template>
+              </ngx-datatable-column>
+           
+             
+                <ngx-datatable-column name="name"  [width]="80">
+                  <ng-template ngx-datatable-header-template>
+                    الاسم
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.name }}
+                </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="name"  >
+                  <ng-template ngx-datatable-header-template>
+                    رقم الهاتف
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.phone }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="name"  >
+                  <ng-template ngx-datatable-header-template>
+                    البريد الالكتروني
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.email }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="name"  >
+                  <ng-template ngx-datatable-header-template>
+                    المحتوي
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.content }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="name"  >
+                  <ng-template ngx-datatable-header-template>
+                    تاريخ الانشاء
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.created_at | date }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="operations" >
+                  <ng-template ngx-datatable-header-template>
+                    خيارات
+                  </ng-template>
+                  <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
+                  ngx-datatable-cell-template>  
+                  <button (click)="viewMessage(row.id)" type="button" class="btn btn-info btn-rounded m-1">
+                    <i class="fa fa-eye"></i>
+                  </button>    
+                  <button type="button" class="btn btn-danger btn-rounded m-1" (click)="deleteMessage(row.id , rowIndex )">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </ng-template>
+                </ngx-datatable-column>
+    
+               
+              </ngx-datatable>
+            </div>
+        </div>
+      </div>
+  </div>  
+

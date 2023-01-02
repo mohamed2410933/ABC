@@ -1,0 +1,105 @@
+
+<div class="card">
+    <div class="card-header">
+        عمل فاتورة
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="addBillForm" (ngSubmit)="onSubmit()">
+          
+            <div class="form-row row">
+            <div class="form-row row">
+                <div class="form-group col" *ngIf="billId">
+                    <label> العميل</label>
+                    <input
+                    readonly
+                    type="text"
+                    formControlName="client"
+                    class="form-control"
+                  />
+                  </div>
+                <div class="form-group col" *ngIf="!billId">
+                    <!-- <label> العميل</label> -->
+                    <!-- <select class="form-select" 
+                         formControlName="client" [disabled]="true">
+                        <option selected>اختر</option>
+                        <option [value]="item.id"  *ngFor="let item of CustomersList">{{item.name}}</option>
+                      </select> -->
+                      <div class="form-group col">
+                        <label>العميل</label>
+                          <ng-select 
+                           [items]="CustomersList" 
+                           bindLabel="name"
+                           bindValue="id" 
+                           [multiple]="false"
+                           placeholder="بحث....." 
+                           [ngModelOptions]="{standalone: true}" 
+                           #client
+                           (keyup)="getAllCustomers(1,client.searchTerm)"
+                           [(ngModel)]="selectedCustomer"
+                           >
+                            <ng-template ng-option-tmp let-item="item"  let-item$="item$" let-index="index">
+                             {{item?.name}}
+                            </ng-template>
+                          </ng-select>
+    
+                      </div>
+                  </div>
+              </div>
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label> الباقة</label>
+                    <select class="form-select" 
+                    formControlName="package">
+                        <option selected disabled>اختر</option>
+                        <option [value]="item.id" *ngFor="let item of PackagesList">{{item.name}}</option>
+                     
+                      </select>
+               
+                  </div>
+                
+              </div>
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>سعر الاشتراك</label>
+                    <input
+                      type="text"
+                      formControlName="price"
+                      class="form-control"
+                      placeholder="سعر الاشتراك"
+                    />
+                 
+                  </div>
+                
+              </div>
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>نوع الفاتورة </label>
+                    <input
+                      type="text"
+                      formControlName="type"
+                      class="form-control"
+                      placeholder="نوع الفاتورة "
+                    />
+                 
+                  </div>
+                
+              </div>
+
+         </div>
+       
+            <div class="form-group">
+              <button *ngIf="!billId" type="button" class="btn btn-primary my-2" (click)="addEditBill(0)">إضافة</button>
+              <button *ngIf="billId"  type="button" class="btn btn-primary my-2" (click)="addEditBill(billId)">تحديث</button>
+                
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button>
+              </div>
+          </form>
+    </div>
+  </div>

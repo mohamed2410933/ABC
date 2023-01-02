@@ -1,0 +1,164 @@
+
+<div class="card">
+    <div class="card-header">
+      إضافة عميل جديد
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="addCustomerForm" (ngSubmit)="onSubmit()">
+          
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>* رقم الهاتف</label>
+                    <input
+                      type="text"
+                      formControlName="phone"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['phone'].errors }"
+                      placeholder="أضف رقم الهاتف"
+                    />
+                    <div *ngIf="submitted && f['phone'].errors" class="invalid-feedback">
+                      <div *ngIf="f['phone'].errors['required']"> رقم الهاتف مطلوب</div>
+                    </div>
+                  </div>
+                  <div class="form-group col">
+                    <label>* البريد الإلكترونى</label>
+                    <input
+                      type="text"
+                      formControlName="email"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                      placeholder="أضف البريد الألكترونى"
+                    />
+                    <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                      <div *ngIf="f['email'].errors['required']"> البريد الإلكترونى مطلوب</div>
+                    </div>
+                  </div>
+              </div>
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>* اسم العضو</label>
+                    <input
+                      type="text"
+                      formControlName="memberName"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['memberName'].errors }"
+                      placeholder="أضف اسم العضو"
+                    />
+                    <div *ngIf="submitted && f['memberName'].errors" class="invalid-feedback">
+                      <div *ngIf="f['memberName'].errors['required']"> اسم العضو مطلوب</div>
+                    </div>
+                  </div>
+                
+              </div>
+
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>* الرقم السرى</label>
+                    <input
+                      type="password"
+                      formControlName="password"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                      placeholder="أضف  الرقم السرى"
+                    />
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                      <div *ngIf="f['password'].errors['required']">  الرقم السرى مطلوب</div>
+                    </div>
+                  </div>
+                <div class="form-group col">
+                    <label>* تأكيد الرقم السرى</label>
+                    <input
+                      type="password"
+                      formControlName="confirmPassword"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+                      placeholder="أضف  الرقم السرى"
+                    />
+                    <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+                      <div *ngIf="f['confirmPassword'].errors['required']">   تأكيد الرقم السرى مطلوب</div>
+                    </div>
+                  </div>
+              </div>
+            <!-- <div class="form-row row">
+              
+              </div> -->
+            <div class="form-row row">
+              <div class="form-group col">
+                <label>* الباقة</label>
+                <select class="form-select" 
+                [ngClass]="{ 'is-invalid': submitted && f['package'].errors }" 
+                formControlName="package">
+                    <option selected disabled>أختر</option>
+                    <option [value]="item.id" *ngFor="let item of PackagesList">{{item?.name}}</option>
+                
+                  </select>
+                <div *ngIf="submitted && f['package'].errors" class="invalid-feedback">
+                  <div *ngIf="f['package'].errors['required']"> الباقة مطلوبة</div>
+                </div>
+              </div>
+                <div class="form-group col" *ngIf="userInfo?.roleId !== 6">
+                    <label>* السوق</label>
+                    <select class="form-select" 
+                    [ngClass]="{ 'is-invalid': submitted && f['market_id'].errors }" 
+                    formControlName="market_id">
+                        <option selected disabled>أختر</option>
+                        <option [value]="item.id" *ngFor="let item of MarketsList">{{item?.name}}</option>
+                      </select>
+                    <div *ngIf="submitted && f['market_id'].errors" class="invalid-feedback">
+                      <div *ngIf="f['market_id'].errors['required']"> السوق مطلوب</div>
+                    </div>
+                  </div>
+
+                  <div class="form-group col">
+                    <label>* الحالة</label>
+                    <select class="form-select" 
+                    [ngClass]="{ 'is-invalid': submitted && f['status'].errors }" 
+                    formControlName="status">
+                        <option selected disabled>أختر</option>
+                        <!-- <option [value]="item.id" *ngFor="let item of PackagesList">{{item?.name}}</option> -->
+                    <option value="active">نشط</option>
+                    <option value="dis-active">غير نشط</option>
+                      </select>
+                    <div *ngIf="submitted && f['status'].errors" class="invalid-feedback">
+                      <div *ngIf="f['status'].errors['required']"> الحالة مطلوبة</div>
+                    </div>
+                  </div>
+              </div>
+
+
+            <div class="form-row row">
+              <div class="form-group col">
+                <label>تاريخ بداية الاشتراك</label>
+                <input
+                  type="date"
+                  formControlName="start_date"
+                  class="form-control"
+                />
+              </div>
+            <div class="form-group col">
+                <label>تاريخ  نهاية الاشتراك</label>
+                <input
+                  type="date"
+                  formControlName="end_date"
+                  class="form-control"
+                />
+              </div>
+            </div>
+            <!-- <div class="form-row row">
+            
+              </div> -->
+            <div class="form-group">
+              <button *ngIf="!customerId" type="button" class="btn btn-primary my-2" (click)="addEditCustomer(0)">إضافة</button>
+              <button *ngIf="customerId"  type="button" class="btn btn-primary my-2" (click)="addEditCustomer(customerId)">تحديث</button>
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button>
+              </div>
+          </form>
+    </div>
+  </div>

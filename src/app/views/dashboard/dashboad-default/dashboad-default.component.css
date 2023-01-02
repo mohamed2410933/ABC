@@ -1,0 +1,27 @@
+
+ 
+ .card-body:hover{
+    background-color: #66339985;
+    border-radius: 10px;
+
+ }
+ .card-body:hover > *{
+        color: #fff ;
+    }
+
+    .card-body h5{
+        cursor: pointer;
+    }
+    .card-body{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .home-statistics{
+        cursor: pointer;
+    }
+   

@@ -1,0 +1,17 @@
+<div class="breadcrumb">
+	<h1>إدارة المحتوي</h1>
+	<ul>
+		<li><a>عن الشركة</a></li>
+		<li></li>
+	</ul>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+
+<textarea class="form-control" [(ngModel)]="aboutUs" rows="3"></textarea>
+
+<div class="form-group">
+	<button type="button" class="btn btn-primary mx-2 my-2" (click)="editAboutUs(aboutUs)">تحديث</button>
+	<button type="button" class="btn btn-danger mx-2 my-2" (click)="aboutUs = ''">مسح</button>
+</div>

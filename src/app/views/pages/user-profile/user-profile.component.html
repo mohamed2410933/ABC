@@ -1,0 +1,89 @@
+<div class="breadcrumb">
+    <h1>الصفحة الشخصية</h1>
+    <ul>
+        <li><a></a></li>
+        <!-- <li>User Profile</li> -->
+    </ul>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<!-- <div class="card user-profile o-hidden mb-4">
+    <div class="header-cover">
+    <img [src]="websiteImg" alt=""   style="height: 65%; width:100%;padding-top: 18px;">
+    </div>
+    <div class="user-info">
+        <img class="profile-picture avatar-lg mb-2" [src]="userInfo?.image" alt="">
+        <p class="m-0 text-24">{{userInfo?.name}}</p>
+        <p class="text-muted m-0">{{userInfo?.roleName}}</p>
+    </div>
+    
+</div> -->
+
+<div class="card-body">
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label>الاسم</label>
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['name'].errors }"
+          />
+          <div *ngIf="submitted && f['name'].errors" class="invalid-feedback">
+            <div *ngIf="f['name'].errors['required']">  الاسم  مطلوب</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>البريد الالكتروني</label>
+          <input
+          readonly
+            type="text"
+            formControlName="email"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+          />
+          <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+            <div *ngIf="f['email'].errors['required']">  البريد الالكتروني مطلوب</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>الرقم السري</label>
+          <input
+            type="password"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+          />
+          <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+            <div *ngIf="f['password'].errors['required']"> الرقم السري مطلوب</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>تأكيد الرقم السري</label>
+          <input
+            type="password"
+            formControlName="confirm_password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['confirm_password'].errors }"
+          />
+          <div *ngIf="submitted && f['confirm_password'].errors" class="invalid-feedback">
+            <div *ngIf="f['confirm_password'].errors['required']"> تأكيد الرقم السري  مطلوب</div>
+          </div>
+        </div>
+      
+     
+    
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary my-2" (click)="updateProfile(profileForm.value)">تحديث</button>
+            <button
+              type="button"
+              (click)="onReset()"
+              class="btn btn-danger mx-2"
+            >
+              مسح
+            </button>
+          </div>
+
+      </form>
+</div>

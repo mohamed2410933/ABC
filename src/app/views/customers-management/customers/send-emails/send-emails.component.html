@@ -1,0 +1,75 @@
+
+
+<div class="card">
+    <div class="card-header">
+      ارسال بريد الكتروني
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="sendEmailForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>البريد الكتروني</label>
+            <!-- <ng-select 
+            [items]="SectorsList" 
+            bindLabel="name"
+            bindValue="id" 
+            [multiple]="false"
+            placeholder="بحث....." 
+            formControlName="sector"
+            #Sector
+            (keyup)="getAllSectors(1,Sector.searchTerm)"
+            [(ngModel)]="selectedStock"
+            >
+             <ng-template ng-option-tmp let-item="item"  let-item$="item$" let-index="index">
+              {{item?.name}}
+             </ng-template>
+           </ng-select> -->
+
+           <ng-select [items]="cars" 
+                [multiple]="true"
+                bindLabel="name" 
+                bindValue="id" 
+                [(ngModel)]="selectedCar"
+                formControlName="email"
+                >
+                <ng-template ng-header-tmp>
+
+                    <div>
+                      <button class="btn btn-link"
+                              (click)="onSelectAll()">تحديد الكل </button>
+                      <button class="btn btn-link"
+                              (click)="onClearAll()">مسح الكل</button>
+                    </div>
+                
+                  </ng-template>
+           </ng-select>
+          </div>
+          <div class="form-row row">
+           
+            <div class="form-group col">
+                <label>* نص الرسالة</label>
+                <textarea class="form-control" formControlName="discription"  rows="3"></textarea>
+                <div *ngIf="submitted && f['discription'].errors" class="invalid-feedback">
+                  <div *ngIf="f['discription'].errors['required']"> نص الرسالة مطلوب</div>
+                </div>
+              </div>
+          </div>
+
+
+          <div class="form-group">
+            <button  type="submit" class="btn btn-primary my-2">إضافة</button>
+              <button
+                type="button"
+                (click)="onReset()"
+                class="btn btn-danger mx-2"
+              >
+                مسح
+              </button>
+            </div>
+          
+          </form>
+         
+
+     
+    </div>
+  </div>

@@ -1,0 +1,69 @@
+
+
+
+body { 
+    margin: 0;
+    font-family: 'Almarai', sans-serif !important;
+}
+
+
+.fa{
+      font-family: 'FontAwesome'!important;
+}
+
+
+.ngx-datatable .datatable-footer .datatable-footer-inner {
+    align-items: center;
+    display: flex;
+    width: 100%;
+    flex-direction: row-reverse;
+    align-content: stretch;
+    justify-content: center;
+}
+
+/* .mat-form-field-flex > .mat-form-field-infix { padding:0 6px !important;
+    line-height: 6px;
+}
+ .mat-form-field-label-wrapper { top: -1.5em; }
+
+ .mat-form-field-appearance-outline.mat-form-field-can-float.mat-form-field-should-float .mat-form-field-label {
+    transform: translateY(-1.1em) scale(.75);
+    width: 133.33333%;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+    border-radius: 4px !important;
+    padding: 0px 7px !important;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-flex {
+	outline: initial !important;
+    background: #fff;
+    border: 1px solid #ced4da;
+    color: #47404f;
+}
+ .mat-form-field-underline {
+    display: none;
+} */
+
+
+.swal2-cancel{
+    margin: 10px;
+}
+
+.page-count{
+    font-size: 20px;
+    font-weight: bold;
+}
+.datatable-header-cell-template-wrap{
+    color: #000000e6;
+    font-weight: bold;
+}
+
+.swal2-html-container{
+    max-height: 300px;
+    display: block;
+    overflow-y: scroll;
+    height: 80px;
+}
+

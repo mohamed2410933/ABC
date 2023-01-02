@@ -1,0 +1,92 @@
+<div class="">
+    <div class="breadcrumb">
+      <h1>إدارة التوصيات</h1>
+      <ul>
+        <li><a>كل الانواع</a></li> 
+        <li></li>
+      </ul>
+    </div>
+  
+    <div class="separator-breadcrumb border-top"></div>
+  
+    <div class="row">
+      <div class="col-2" *ngIf="userInfo?.roleId !== 5">
+       <a routerLink="/recommendationsManagement/recommendationtypes/operations/new"><button mat-raised-button  class="btn btn-primary my-2">إضافة جديدة</button></a>
+      </div>
+      <div class="col-6">
+        <div class="search-bar my-2 ml-auto ">
+          <input type="search" class="form-control" placeholder="بحث في الصفحة الحالية"  [(ngModel)]="filterData">
+      </div>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <button mat-raised-button  class="btn btn-primary my-2" (click)="getAllRecommendationsTypes(1,filterData)">بحث في كل الصفحات</button>
+       </div>
+      </div>
+  
+  
+      <div class="row">
+        <div class="col-md-12">
+            <div class="card o-hidden">
+              <ngx-datatable
+           
+
+              style="height: calc(100vh - 270px); box-shadow: none" class="material fullscreen"
+              [columnMode]="'force'" 
+              [headerHeight]="50"
+              [footerHeight]="50" 
+              [rowHeight]="50" 
+              [scrollbarV]="true"
+              [virtualization]="false"
+              [scrollbarH]="true"
+              [rows]="RecommendationsTypesList | fillter:filterData"
+              #table
+              >
+
+             
+
+                <ngx-datatable-column name="subtitle" [width]="60" [maxWidth]="200">
+                  <ng-template ngx-datatable-header-template>
+                  ID
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.id}}
+                </ng-template>
+                </ngx-datatable-column>
+
+                <ngx-datatable-column name="subtitle" [width]="160" [maxWidth]="300">
+                  <ng-template ngx-datatable-header-template>
+                  النوع
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.name}}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="subtitle" [width]="260" [maxWidth]="600">
+                  <ng-template ngx-datatable-header-template>
+                  الوصف
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.description}}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="operations" [width]="160" [maxWidth]="400" *ngIf="userInfo?.roleId !== 5">
+                  <ng-template ngx-datatable-header-template>
+                    خيارات
+                  </ng-template>
+                  <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
+                  ngx-datatable-cell-template>      
+                  <button type="button" class="btn btn-primary btn-rounded m-1" (click)="toEditRecomondationType(row.id)" >
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <!-- <button type="button" class="btn btn-danger btn-rounded m-1">
+                    <i class="fa fa-trash"></i>
+                  </button> -->
+                </ng-template>
+                </ngx-datatable-column>
+    
+               
+              </ngx-datatable>
+            </div>
+        </div>
+      </div>
+  </div>  

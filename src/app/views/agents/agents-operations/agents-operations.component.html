@@ -1,0 +1,165 @@
+
+
+
+<div class="">
+    <div class="breadcrumb">
+      <i class="i-Newspaper"></i> 
+      <h1>الوكيل</h1>
+      <ul>
+        <li><a>{{salesName}}</a></li>
+        <li></li>
+      </ul>
+ 
+
+   
+    </div>
+  
+    <div class="separator-breadcrumb border-top"></div>
+  
+    <div class="row">
+    <div class="col-6">
+           <button mat-raised-button  class="btn btn-danger my-2" (click)="unAssignClientFromSales()">ازالة العملاء المحددين</button>
+      </div>
+      <div class="col-6">
+        <div class="search-bar my-2 ml-auto ">
+          <input type="search" class="form-control" placeholder="بحث"  [(ngModel)]="filterData">
+      </div>
+      </div>
+      </div>
+  
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card o-hidden">
+            <ngx-datatable style="height: calc(160vh - 270px); box-shadow: none" [columnMode]="'force'" [headerHeight]="50"
+              [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [virtualization]="false" #table
+              [limit]="pageData?.per_page" 
+              [rows]="clientsSalesList| fillter:filterData" class="material" 
+             
+              [count]="pageData?.total" [offset]="pageData?.current_page - 1"
+              (page)="getAllClientsForSelse($event.offset + 1)"
+              (activate)="onActivate($event)"
+               
+               >
+               <ngx-datatable-column
+           
+                 [width]="30"
+                 [sortable]="false"
+                 [canAutoResize]="false"
+                 [draggable]="false"
+                 [resizeable]="false"
+               >
+                 <ng-template
+                   ngx-datatable-cell-template
+                   let-value="value"
+                   let-isSelected="isSelected"
+                   let-onCheckboxChangeFn="onCheckboxChangeFn"
+     
+                 >
+                   <input type="checkbox" [checked]="isSelected"  (change)="onCheckboxChangeFn($event)" />
+                 </ng-template>
+               </ngx-datatable-column>
+
+              <ngx-datatable-column name="name">
+                <ng-template ngx-datatable-header-template>
+                ID  
+                </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                  {{row?.id}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="name">
+                <ng-template ngx-datatable-header-template>
+                  العميل 
+                </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                  {{row?.client}}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="name">
+                <ng-template ngx-datatable-header-template>
+                  رقم التليفون
+                </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                  {{row?.phone }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="name">
+                <ng-template ngx-datatable-header-template>
+                 البريد الالكتروني
+                </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                  {{row?.email }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="category">
+                <ng-template ngx-datatable-header-template>
+                  تاريخ الإنشاء
+                </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                  {{row.created_at | date }}
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="name" >
+                <ng-template ngx-datatable-header-template>
+                  مفعل ؟!	
+                </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                  <!-- {{row?.status }} -->
+                  <span *ngIf="row?.status == 'active'">عميل فعال</span> 
+                  <span *ngIf="row?.status !== 'active'">عميل غير فعال</span> 
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="name" >
+                <ng-template ngx-datatable-header-template>
+                  الاستجابة	           
+                 </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                  <span *ngIf="row?.AssignComment !== null">
+                    {{getResponse(row?.AssignComment)}}
+                </span>
+                <span *ngIf="!row?.AssignComment">
+                    {{'none'}}
+                </span>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="name"  >
+                <ng-template ngx-datatable-header-template>
+                  توضيح الاستجابة		  
+                          
+                 </ng-template>
+                <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+                  <span *ngIf="row?.AssignComment">
+                    {{getNote(row?.AssignComment)}}
+                </span>
+                <span *ngIf="!row?.AssignComment">
+                    {{'none'}}
+                </span>
+                </ng-template>
+              </ngx-datatable-column>
+
+<!--               
+              <ngx-datatable-column name="operations" >
+                <ng-template ngx-datatable-header-template>
+                  خيارات
+                </ng-template>
+                <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
+                ngx-datatable-cell-template>    
+                <button type="button" class="btn btn-danger btn-rounded m-1" (click)="unAssignClientFromSales(row.id , rowIndex )">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </ng-template>
+              </ngx-datatable-column> -->
+
+
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+  </div>  
+
+
+
+
+
+
+  

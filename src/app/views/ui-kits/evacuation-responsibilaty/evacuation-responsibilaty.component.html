@@ -1,0 +1,22 @@
+<div class="breadcrumb">
+	<h1>إدارة المحتوي</h1>
+	<ul>
+		<li><a>إخلاء المسؤلية</a></li>
+		<li></li>
+	</ul>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<!-- <angular-editor [(ngModel)]="htmlContent" [config]="config"></angular-editor>
+
+<div class="text-center mt-4">
+	<button type="submit" class="btn btn-primary btn-rounded m-1 w-25" (click)="editResponsibility()">تحديث</button>
+ </div> -->
+
+ <textarea class="form-control" [(ngModel)]="responsibility" rows="3"></textarea>
+
+<div class="form-group">
+	<button type="button" class="btn btn-primary mx-2 my-2" (click)="editResponsibility(responsibility)">تحديث</button>
+	<button type="button" class="btn btn-danger mx-2 my-2" (click)="responsibility = ''">مسح</button>
+</div>

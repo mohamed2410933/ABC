@@ -1,0 +1,131 @@
+<div class="">
+    <div class="breadcrumb">
+      <h1>إدارة العملاء</h1>
+      <ul>
+        <li><a>كل الباقات</a></li>
+        <li></li>
+      </ul>
+    </div>
+  
+    <div class="separator-breadcrumb border-top"></div>
+  
+    <div class="row">
+      <div class="col-2" *ngIf="userInfo?.roleId !== 5 && userInfo?.roleId !== 4">
+       <a routerLink="/customersManagement/packages/operations/new"><button mat-raised-button  class="btn btn-primary my-2">إضافة جديدة</button></a>
+      </div>
+      <div class="col-6">
+        <div class="search-bar my-2 ml-auto ">
+          <input type="search" class="form-control" placeholder="بحث في الصفحة الحالية"  [(ngModel)]="filterData">
+      </div>
+      </div>
+      <div class="col-md-2 col-sm-12">
+        <button mat-raised-button  class="btn btn-primary my-2" (click)="getAllPackages(1,filterData)">بحث في كل الصفحات</button>
+       </div>
+      </div>
+  
+  
+      <div class="row">
+        <div class="col-md-12">
+            <div class="card o-hidden">
+              <ngx-datatable
+              
+
+              style="height: calc(100vh - 270px); box-shadow: none" class="material fullscreen"
+              [columnMode]="'force'" 
+              [headerHeight]="50"
+              [footerHeight]="50" 
+              [rowHeight]="50" 
+              [scrollbarV]="true"
+              [virtualization]="false"
+              [scrollbarH]="true"
+              [rows]="PackagesList | fillter:filterData"
+              #table
+              >
+
+              <!-- style="height: calc(100vh - 270px); box-shadow: none"
+              [columnMode]="'force'"
+              [headerHeight]="50"
+              [footerHeight]="50" 
+              [rowHeight]="50" 
+              [scrollbarV]="true"
+              [scrollbarH]="true"
+              [virtualization]="false"
+              #table
+              [limit]="pageData?.per_page" 
+              [rows]="PackagesList| fillter:filterData"
+              class="material"
+              [externalPaging]="true"
+              [count]="pageData?.total"
+              [offset]="pageData?.current_page - 1"
+              (page)="getAllPackages($event.offset + 1)" -->
+          
+              <ngx-datatable-column name="photo" [width]="40" >
+                <ng-template ngx-datatable-header-template>
+                  صورة
+                </ng-template>
+                  <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+                      <img height="32px" width="32px" style="border-radius: 4px" [src]="row?.image" alt="">
+                  </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="name"  [width]="40">
+                <ng-template ngx-datatable-header-template>
+               ID
+                </ng-template>
+                <ng-template   let-value="value" let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                  <!-- {{row?.id }} -->
+                  {{rowIndex+1}}
+              </ng-template>
+              </ngx-datatable-column>
+       
+                <ngx-datatable-column name="category"  >
+                  <ng-template ngx-datatable-header-template>
+                    الباقة
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.name }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="name"  >
+                  <ng-template ngx-datatable-header-template>
+                    السعر
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.price}} جنية مصري
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category"  >
+                  <ng-template ngx-datatable-header-template>
+                    الصلاحية باليوم	
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.days}} يوم
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category"  >
+                  <ng-template ngx-datatable-header-template>
+                    السوق
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.market_name}} 
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="operations"  *ngIf="userInfo?.roleId !== 5 && userInfo?.roleId !== 4">
+                  <ng-template ngx-datatable-header-template>
+                    خيارات
+                  </ng-template>
+                  <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
+                  ngx-datatable-cell-template>      
+                  <button type="button" class="btn btn-primary btn-rounded m-1"  (click)="toEditPackage(row.id)">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                
+                </ng-template>
+                </ngx-datatable-column>
+    
+               
+              </ngx-datatable>
+            </div>
+        </div>
+      </div>
+  </div>  
+

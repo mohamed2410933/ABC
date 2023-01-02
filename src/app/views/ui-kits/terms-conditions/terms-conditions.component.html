@@ -1,0 +1,18 @@
+<div class="breadcrumb">
+	<h1>إدارة المحتوي</h1>
+	<ul>
+		<li><a>الشروط والاحكام</a></li>
+		<li></li>
+	</ul>
+</div>
+
+<div class="separator-breadcrumb border-top"></div>
+
+<textarea class="form-control" [(ngModel)]="termsCondition" rows="3"></textarea>
+
+ <div class="form-group">
+	 <button type="button" class="btn btn-primary mx-2 my-2" (click)="editTerms(termsCondition)">تحديث</button>
+	 <button type="button" class="btn btn-danger mx-2 my-2" (click)="termsCondition = ''">مسح</button>
+ </div>
+
+

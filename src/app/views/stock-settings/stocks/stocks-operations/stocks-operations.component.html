@@ -1,0 +1,104 @@
+<div class="card">
+    <div class="card-header">
+      إضافة سهم جديد
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="stockForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+              <label>كود السهم</label>
+              <input
+                type="text"
+                formControlName="stockCode"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['stockCode'].errors }"
+              />
+              <div *ngIf="submitted && f['stockCode'].errors" class="invalid-feedback">
+                <div *ngIf="f['stockCode'].errors['required']"> كود السهم  مطلوب</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label> اسم السهم</label>
+              <input
+                type="text"
+                formControlName="stockName"
+                class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['stockName'].errors }"
+              />
+              <div *ngIf="submitted && f['stockName'].errors" class="invalid-feedback">
+                <div *ngIf="f['stockName'].errors['required']"> اسم السهم مطلوب</div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>القطاع</label>
+
+              <!-- <select class="form-select form-control" 
+              formControlName="sector"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['sector'].errors }" 
+                id="test"  >
+                <input type="text" name="" class="form-control" id="">
+                <option selected disabled>أختر</option>
+                <option [value]="item.id" *ngFor="let item of SectorsList">{{item?.name}}</option>
+              </select> -->
+              <ng-select 
+              [items]="SectorsList" 
+              bindLabel="name"
+              bindValue="id" 
+              [multiple]="false"
+              placeholder="بحث....." 
+              formControlName="sector"
+              #Sector
+              (keyup)="getAllSectors(1,Sector.searchTerm)"
+              [(ngModel)]="selectedStock"
+              >
+              
+              <!-- [ngModelOptions]="{standalone: true}"  -->
+
+               <ng-template ng-option-tmp let-item="item"  let-item$="item$" let-index="index">
+                {{item?.name}}
+               </ng-template>
+             </ng-select>
+
+              <!-- <div *ngIf="submitted && f['sector'].errors" class="invalid-feedback">
+                <div *ngIf="f['sector'].errors['required']">  القطاع مطلوب</div>
+              </div> -->
+            </div>
+
+
+            <div class="form-group">
+              <label>نوع الأسهم</label>
+              <select class="form-select" 
+              formControlName="stocktype"
+              class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f['stocktype'].errors }" 
+              >
+                <option selected disabled>نوع شرعية السهم</option>
+                <option value="1">شرعى</option>
+                <option value="2">غير شرعى</option>
+                <option value="3"> مختلط</option>
+              </select>
+              <!-- <div *ngIf="submitted && f['stocktype'].errors" class="invalid-feedback">
+                <div *ngIf="f['stocktype'].errors['required']"> نوع الأسهم مطلوب</div>
+              </div> -->
+            </div>
+         
+        
+            <div class="form-group">
+              <button *ngIf="!stockId" type="button" class="btn btn-primary my-2" (click)="addEditStock(0)">إضافة</button>
+              <button *ngIf="stockId"  type="button" class="btn btn-primary my-2" (click)="addEditStock(stockId)">تحديث</button>
+
+                
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button>
+              </div>
+
+          </form>
+    </div>
+  </div>

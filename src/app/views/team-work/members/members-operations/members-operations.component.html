@@ -1,0 +1,119 @@
+
+<div class="card">
+    <div class="card-header">
+      <span>
+        أضافة عضو جديد
+      </span>
+      <span *ngIf="userInfo?.roleId === 6">
+        <span>
+             {{websiteUrl}}
+        </span>  
+      
+      </span>
+    </div>
+   
+    <div class="card-body">
+        <form [formGroup]="addMemberForm" (ngSubmit)="onSubmit()">
+          
+            <div class="form-row row">
+                <div class="form-row ">
+                    <div class="form-group col">
+                        <label>* اسم العضو</label>
+                        <input
+                          type="text"
+                          formControlName="memberName"
+                          class="form-control"
+                          [ngClass]="{ 'is-invalid': submitted && f['memberName'].errors }"
+                          placeholder="أضف اسم العضو"
+                        />
+                        <div *ngIf="submitted && f['memberName'].errors" class="invalid-feedback">
+                          <div *ngIf="f['memberName'].errors['required']"> اسم العضو مطلوب</div>
+                        </div>
+                      </div>
+                    
+                  </div>
+                <div class="form-row ">
+                    <div class="form-group col">
+                        <label>* الصلاحية</label>
+                        <!-- <input
+                          type="text"
+                          formControlName="validity"
+                          class="form-control"
+                          [ngClass]="{ 'is-invalid': submitted && f['validity'].errors }"
+                          placeholder=" أختر صلاحية العضو..."
+                        /> -->
+                        
+                        <select formControlName="validity" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.validity.errors }">
+                          <option value="" selected disabled>Select</option>
+                          <ng-container *ngIf="userInfo?.roleId !== 6" >
+                            <option [value]="item.id" *ngFor="let item of RolesList">{{item['arabic-name'] }} </option>
+                          </ng-container>
+                          <option *ngIf="userInfo?.roleId == 6" [value]="3">{{'مسوق الكتروني'}} </option>
+                        </select>
+
+                        <div *ngIf="submitted && f['validity'].errors" class="invalid-feedback">
+                          <div *ngIf="f['validity'].errors['required']"> صلاحية العضو مطلوب</div>
+                        </div>
+                      </div>
+                    
+                  </div>
+                
+              </div>
+              <div class="form-group col">
+                <label>* البريد الإلكترونى</label>
+                <input
+                  type="text"
+                  formControlName="email"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+                  placeholder="أضف البريد الألكترونى"
+                />
+                <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+                  <div *ngIf="f['email'].errors['required']"> البريد الإلكترونى مطلوب</div>
+                </div>
+              </div>
+
+            <div class="form-row row">
+                <div class="form-group col">
+                    <label>* الرقم السرى</label>
+                    <input
+                      type="password"
+                      formControlName="password"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+                      placeholder="أضف  الرقم السرى"
+                    />
+                    <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+                      <div *ngIf="f['password'].errors['required']">  الرقم السرى مطلوب</div>
+                    </div>
+                  </div>
+                <div class="form-group col">
+                    <label>* تأكيد الرقم السرى</label>
+                    <input
+                      type="password"
+                      formControlName="confirmPassword"
+                      class="form-control"
+                      [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+                      placeholder="أضف  الرقم السرى"
+                    />
+                    <div *ngIf="submitted && f['confirmPassword'].errors" class="invalid-feedback">
+                      <div *ngIf="f['confirmPassword'].errors['required']">   تأكيد الرقم السرى مطلوب</div>
+                    </div>
+                  </div>
+              </div>
+         
+            <div class="form-group">
+                <button *ngIf="!memberId" type="button" class="btn btn-primary my-2" (click)="addEditMember(0)">إضافة</button>
+                <button *ngIf="memberId"  type="button" class="btn btn-primary my-2" (click)="addEditMember(memberId)">تحديث</button>
+                
+                <button
+                  type="button"
+                  (click)="onReset()"
+                  class="btn btn-danger mx-2"
+                >
+                  مسح
+                </button>
+              </div>
+          </form>
+    </div>
+  </div>

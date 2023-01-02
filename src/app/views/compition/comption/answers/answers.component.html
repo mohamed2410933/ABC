@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="card-header">
+      <i class="i-Newspaper"></i> 
+     <span  class="mx-2"> إجابات العملاء </span>  
+   
+
+     </div>
+<div *ngIf="answersList?.length > 0">
+  <div class="card text-center" *ngFor="let item of answersList" style="margin:2rem">
+    <div class="card-header">
+    العميل : {{item?.client}}
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"> السؤال :{{item?.question}}</h5>
+      <p class="card-text"> الاجابة : {{item?.answer}}</p>
+    </div>
+    <!-- <div class="card-footer">
+        {{item?.email}}
+    </div> -->
+  </div>
+</div>
+</div>

@@ -1,0 +1,30 @@
+
+
+<div class="container">
+<div class="row text-center">
+
+<h2>تاريخ خدمة العميل
+</h2>
+
+</div>
+
+
+    <div class="card text-center my-4" *ngFor="let item of clientHistoryList">
+        <div class="card-header">
+         اسم العميل :  {{item.client}} 
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">رقم الهاتف  : {{item.phone}}</h5>
+          <h5 class="card-title">البريد الالكتروني  :   {{item.email}}</h5>
+          <h5 class="card-title">الحالة  :  {{item.status == 'active' ? 'نشط' : 'غير نشط' }}</h5>
+        
+        </div>
+        <div class="card-footer font-weight-800">
+         القائم بخدمة العميل :  {{item?.user}}
+        </div>
+      </div>
+
+      <div class="text-center my-5" *ngIf="clientHistoryList?.length == 0">
+     <h2>   لا يوجد خدمة مسبقة لهذا العميل </h2>
+      </div>
+</div>
