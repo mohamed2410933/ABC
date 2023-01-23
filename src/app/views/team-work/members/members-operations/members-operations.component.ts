@@ -111,13 +111,17 @@ RolesList=[]
     this.toastr.success(res['message']);
     if(this.userInfo.roleId == 6){
       if(this.userInfo.website.id === 1){
-           this.websiteUrl = `https://aly-thiqa.vercel.app/marketer/login/${res['data']}`
+        this.websiteUrl=`http://thiqa.abctadawul.com/marketer/login/${res['user_id']}`
       }else{
-          this.websiteUrl=`https://abc-tadawl-app.vercel.app/marketer/login/${res['data']}`
+        this.websiteUrl = `https://abctadawul.com/marketer/login/${res['user_id']}`
       }
       // this.router.navigateByUrl('/teamWork/follow-markter');
 
-    }else{
+    }else if(this.userInfo.roleId == 5){
+       this.router.navigateByUrl('/teamWork/myAgents');
+    }
+    
+    else{
       this.router.navigateByUrl('/teamWork/team-work');
     }
     // console.log(res);

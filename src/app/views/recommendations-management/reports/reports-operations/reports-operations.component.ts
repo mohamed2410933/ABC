@@ -29,7 +29,7 @@ export class ReportsOperationsComponent implements OnInit {
     this.getAllMarkets();
     this.addReportForm = this.formBuilder.group({
       discription: ["", Validators.required],
-      addFile: ["", !this.reportId ? Validators.required : []],
+      addFile: [""],
       AddImage: ["", !this.reportId ? Validators.required : []],
       market_id: ["", Validators.required],
     });

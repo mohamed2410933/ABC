@@ -1,13 +1,9 @@
 <div class="">
-
     <div class="breadcrumb">
-      <i class="i-Newspaper"></i> 
-
-      <h1 class="mx-2">المنافسة</h1>
-
+      <h1>فريق الماركت</h1>
       <ul>
-        <!-- <li><a href="#"></a></li> -->
-        <!-- <li>الأعضاء </li> -->
+        <li><a>الأعضاء</a></li>
+        <li></li>
       </ul>
     </div>
   
@@ -15,7 +11,7 @@
   
     <div class="row">
       <div class="col-2">
-       <a routerLink="/comption/operations/new"><button mat-raised-button  class="btn btn-primary my-2">إضافة جديدة</button></a>
+       <a routerLink="/teamWork/team-work/operations/new"><button mat-raised-button  class="btn btn-primary my-2">إضافة جديدة</button></a>
       </div>
       <div class="col-6">
         <div class="search-bar my-2 ml-auto ">
@@ -23,17 +19,16 @@
       </div>
       </div>
       <div class="col-md-2 col-sm-12">
-        <button mat-raised-button  class="btn btn-primary my-2" (click)="getAllComptions(1,filterData)">بحث في كل الصفحات</button>
+        <button mat-raised-button  class="btn btn-primary my-2" (click)="getAllMembers(1,filterData)">بحث في كل الصفحات</button>
        </div>
       </div>
+  
   
       <div class="row">
         <div class="col-md-12">
             <div class="card o-hidden">
               <ngx-datatable
-            
-              
-              style="height: calc(160vh - 270px); box-shadow: none"
+              style="height: calc(100vh - 270px); box-shadow: none"
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50" 
@@ -43,81 +38,82 @@
               [virtualization]="false"
               #table
               [limit]="pageData?.per_page" 
-              [rows]="comptionsList| fillter:filterData"
+              [rows]="membersList| fillter:filterData"
               class="material"
               [externalPaging]="true"
               [count]="pageData?.total"
               [offset]="pageData?.current_page - 1"
-              (page)="getAllComptions($event.offset + 1)"
+              (page)="getAllMembers($event.offset + 1)" 
               >
 
-             
-              <ngx-datatable-column name="name"  [width]="40">
-                <ng-template ngx-datatable-header-template>
-               ID
-                </ng-template>
-                <ng-template   let-value="value" let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
-                  <!-- {{row?.id }} -->
-                  {{rowIndex+1}}
-              </ng-template>
-              </ngx-datatable-column>
-                <ngx-datatable-column name="photo" [width]="40" >
+         
+
+                <ngx-datatable-column name="name" >
                   <ng-template ngx-datatable-header-template>
-                    صورة
+                  ID
                   </ng-template>
-                    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
-                        <img height="32px" width="32px" style="border-radius: 4px" [src]="row?.image" alt="">
-                    </ng-template>
+                  <ng-template   let-value="value" let-rowIndex="rowIndex" let-row="row" ngx-datatable-cell-template>
+                    <!-- {{row?.id }} -->
+                    {{rowIndex+1}}
+                </ng-template>
                 </ngx-datatable-column>
-             
-                <ngx-datatable-column name="name"  [width]="80">
+                <ngx-datatable-column name="name" >
                   <ng-template ngx-datatable-header-template>
-                    عنوان السؤال
+                   الاسم
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row?.title }}
+                    {{row?.name }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    البريد الإلكترونى	
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.email }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    الصلاحية
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                   {{row.role_name}}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    عدد العملاء
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                   {{row?.countClient}}
                 </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="name"  >
+                <ngx-datatable-column name="category" >
                   <ng-template ngx-datatable-header-template>
-                    السؤال
+                    وقت الأنشاء	
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row?.question }}
+                    {{row.created_at | date }}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="name"  >
-                  <ng-template ngx-datatable-header-template>
-                    الحالة
-                  </ng-template>
-                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row?.status == 'publish'? 'نشر' : 'عدم النشر' }}
-                </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="name"  >
-                  <ng-template ngx-datatable-header-template>
-                    السوق
-                  </ng-template>
-                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row?.market_name }}
-                </ng-template>
-                </ngx-datatable-column>
-                <ngx-datatable-column name="operations" >
+              
+    
+                <ngx-datatable-column name="operations" [width]="200" >
                   <ng-template ngx-datatable-header-template>
                     خيارات
                   </ng-template>
                   <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
-                  ngx-datatable-cell-template>    
-                  <button (click)="viewAnswes(row.id)" type="button" class="btn btn-info btn-rounded m-1">
-                    <i class="fa fa-eye"></i>
-                  </button>  
-                  <button type="button" class="btn btn-primary btn-rounded m-1" (click)="toEditComption(row.id)" >
+                  ngx-datatable-cell-template>      
+                  <button  type="button" class="btn btn-primary btn-rounded m-1" (click)="toEditMember(row.id)" >
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button type="button" class="btn btn-danger btn-rounded m-1" (click)="deleteComption(row.id , rowIndex )">
+                  <button  type="button" class="btn btn-danger btn-rounded m-1" (click)="deleteMember(row.id , rowIndex )">
                     <i class="fa fa-trash"></i>
                   </button>
+                
+            
                 </ng-template>
                 </ngx-datatable-column>
     

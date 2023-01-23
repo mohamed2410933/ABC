@@ -29,16 +29,27 @@
                 <div class="form-group col">
                     <label>نوع التوصية</label>
               
-                    <select class="form-select" 
+                    <!-- <select class="form-select" 
                     formControlName="recomondationTypeId" >
                     <option value="" disabled="" selected="">أختر</option>
-                        <option value="1">مضاربية</option>
-                        <option value="2"> قصيرة المدي</option>
-                        <option value="3">لحظية</option>
-                        <option value="4">استثمارية</option>
-                        <option value="5">برونزية</option>
-                        <option value="6">غير محدد</option>
-                      </select>
+                        <option [value]="item?.id" *ngFor="let item of RecommendationsTypesList">{{item?.name}}</option>
+                      </select> -->
+
+                      <ng-select 
+                          [items]="RecommendationsTypesList" 
+                          bindLabel="name"
+                          bindValue="id" 
+                          [multiple]="false"
+                          placeholder="بحث....." 
+                          [ngModelOptions]="{standalone: true}" 
+                          #recomdation
+                          (keyup)="getAllRecommendationsTypes(1,recomdation.searchTerm)"
+                          [(ngModel)]="selectedRec"
+                      >
+                       <ng-template ng-option-tmp let-item="item"  let-item$="item$" let-index="index">
+                        {{item?.name}}
+                       </ng-template>
+                     </ng-select>
                   </div>
               </div>
             <div class="form-row row">

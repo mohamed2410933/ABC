@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+// import { Router } from 'express';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { ProductService } from 'src/app/shared/services/product.service';
 import { ViewService } from 'src/app/shared/services/view.service';
 
 @Component({
-  selector: 'app-members',
-  templateUrl: './members.component.html',
-  styleUrls: ['./members.component.scss']
+  selector: 'app-marks',
+  templateUrl: './marks.component.html',
+  styleUrls: ['./marks.component.scss']
 })
-export class MembersComponent implements OnInit {
+export class MarksComponent implements OnInit {
 
   roleIndex
   filterData
@@ -32,7 +32,7 @@ export class MembersComponent implements OnInit {
   pageData
   getAllMembers(page , q ='') {
     this.spinner.show();
-    this.viewService.GetAll('users',page , q).then(res => {
+    this.viewService.GetAll('user/marketing-admin',page , q).then(res => {
       this.spinner.hide();
       // if(this.userInfo.role != 6){
         this.membersList = res['data'].data;

@@ -38,9 +38,9 @@
                 class="form-control"
                 [ngClass]="{ 'is-invalid': submitted && f['addFile'].errors }"
                 (change)="onFileSelected()"  accept="application/pdf"  />
-              <div *ngIf="submitted && f['addFile'].errors" class="invalid-feedback">
+              <!-- <div *ngIf="submitted && f['addFile'].errors" class="invalid-feedback">
                 <div *ngIf="f['addFile'].errors['required']">الملف مطلوب</div>
-              </div>
+              </div> -->
             </div>
          
 

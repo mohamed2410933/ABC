@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -9,7 +9,8 @@ import Swal from 'sweetalert2';
 export class ViewService {
 
   // public apiUrl = 'https://abctdawltest.pro-erp.site/public/api/';
-  public apiUrl = 'https://abctdawltest.nodev.store/public/api/';
+  // public apiUrl = 'https://abctdawltest.nodev.store/public/api/';
+  public apiUrl = 'http://backendcrm.abctadawul.com/api/';
   // https://abctdawltest.pro-erp.site/public/api
   
 
@@ -729,7 +730,7 @@ AssignCustomersToSales(clients , userId){
     headers = headers.append('Authorization', 'Bearer ' + this.userInfo['token']);
     headers = headers.append('token', this.userInfo['token']);
     return this.http.get(this.apiUrl + `admin/${type}?page=${page}&search=${search}`, { headers }).toPromise();
-  }
+}
   //===========================================================================================
   public ShowById(type, id) {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
@@ -749,6 +750,33 @@ AssignCustomersToSales(clients , userId){
   setAnswers(answers: any) {
     this.checkIsAnswerComption.next(answers)
   }
+
+
+  //============================================================================================
+sendEmail(ids , obj){
+  debugger
+  this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  let headers: HttpHeaders = new HttpHeaders();
+  headers = headers.append('Accept', 'application/json');
+  headers = headers.append('Authorization', 'Bearer ' + this.userInfo['token']);
+  headers = headers.append('token', this.userInfo['token']);
+  const params = new HttpParams({ 
+      // params.append('actors', JSON.stringify(actors);
+ });
+ let client_ids : any=[]
+for (var j = 0; j < ids.length; j++) {
+  // params.append('client_ids[]', client_ids[j].toString());
+  client_ids += `client_ids[]=${ids[j]}&`
+}
+
+  // formdata.append('specialites[]', form[i].inputValue[j].toString());
+  return this.http.get(this.apiUrl + `admin/recommendations-email?${client_ids}&address=${obj.address
+  }&data=${obj.data}&title=${obj.title }&website=${this.userInfo.website.id}`, { headers }).toPromise();
+ 
+ 
+
+}
+
   //============================================================================================
   PopupDeletition(type, id) {
     const swalWithBootstrapButtons = Swal.mixin({

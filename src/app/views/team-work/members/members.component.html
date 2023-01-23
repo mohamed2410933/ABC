@@ -92,16 +92,16 @@
                 </ngx-datatable-column>
               
     
-                <ngx-datatable-column name="operations" [width]="200">
+                <ngx-datatable-column name="operations" [width]="200" >
                   <ng-template ngx-datatable-header-template>
                     خيارات
                   </ng-template>
                   <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
                   ngx-datatable-cell-template>      
-                  <button type="button" class="btn btn-primary btn-rounded m-1" (click)="toEditMember(row.id)" >
+                  <button  type="button" class="btn btn-primary btn-rounded m-1" (click)="toEditMember(row.id)" >
                     <i class="fa fa-edit"></i>
                   </button>
-                  <button type="button" class="btn btn-danger btn-rounded m-1" (click)="deleteMember(row.id , rowIndex )">
+                  <button  type="button" class="btn btn-danger btn-rounded m-1" (click)="deleteMember(row.id , rowIndex )">
                     <i class="fa fa-trash"></i>
                   </button>
                 </ng-template>

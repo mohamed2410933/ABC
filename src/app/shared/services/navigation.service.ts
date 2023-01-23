@@ -168,7 +168,7 @@ export class NavigationService {
             icon: 'i-Business-Mens',
             // state: '/teamWork',
             role:1,
-            permissions:[1],
+            permissions:[1,6,5],
             sub:[
                 { icon: 'i-Big-Data',
                  name: 'الاعضاء', 
@@ -180,8 +180,21 @@ export class NavigationService {
                 name: 'متابعة المسوقين', 
                 state: '/teamWork/follow-markter', 
                 type: 'link' ,
-                permissions:[1],
+                permissions:[1,6],
             },
+                { icon: 'i-Big-Data', 
+                name: 'المسوقين', 
+                state: '/teamWork/markters', 
+                type: 'link' ,
+                permissions:[6],
+            },
+                { icon: 'i-Big-Data', 
+                name: 'الوكلاء', 
+                state: '/teamWork/myAgents', 
+                type: 'link' ,
+                permissions:[5],
+            },
+          
             ]
 
         },

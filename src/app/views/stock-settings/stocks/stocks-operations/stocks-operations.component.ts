@@ -34,7 +34,7 @@ stockId
       this.getStockById(this.stockId)
       
     }
-    // this.getAllSectors(1)
+    this.getAllSectors(1)
 
 
     // this.exampleData = [

@@ -113,14 +113,14 @@ export class CustomersComponent implements OnInit {
      }
   }
 
-  toSendEmails(id){
-    this.router.navigateByUrl(`/customersManagement/customers/sendEmails/${id}`)
+  toSendEmails(){
+    this.router.navigateByUrl(`/customersManagement/customers/sendEmails`)
   }
 
   clientsMarketMonth=[]
   getClientForMarkter(){
     this.spinner.show()
-    this.viewService.GetAll('assign-agent-customer/marketer-clients').then(res=>{
+    this.viewService.GetAll('assign-agent-customer/marketer-clients','' , '').then(res=>{
       this.spinner.hide();
 
 this.clientsMarketMonth = res['data']
@@ -130,5 +130,14 @@ this.clientsMarketMonth = res['data']
       err.error.message ? this.toastr.error(err.error.message) : this.toastr.error('حدث خطأ في النظام')
 
     })
+  }
+
+
+  openAddClient(){
+    if(this.userInfo.website.id === 1 ){
+      window.open(`http://thiqa.abctadawul.com/marketer/login/${this.userInfo.id}`, "_blank");
+    }else{
+      window.open(`https://abctadawul.com/marketer/login/${this.userInfo.id}`, "_blank");
+    }
   }
 }

@@ -31,7 +31,7 @@ export class AgentsComponent implements OnInit {
   pageData
   getAllAgents(page? , q='') {
     this.spinner.show();
-    this.viewService.GetAllCustomers(page , q).then(res => {
+    this.viewService.GetAll('client/new',page , q).then(res => {
       this.spinner.hide();
       this.agentsList = res['data'].data
       this.pageData = res['data'];
@@ -74,7 +74,8 @@ assignCustomersToSales(){
   this.spinner.show();
   this.viewService.AssignCustomersToSales(this.selectedCustomersList , this.salesId).then(res=>{
     this.spinner.hide();
-    this.toastr.success(res['message'])
+    this.toastr.success(res['message']);
+    window.location.reload()
     this.agentsList = this.agentsList.filter(x=>this.selectedCustomersList.find(e=>x.id !== e))
     $('input[type=checkbox]').prop('checked', false);
   }).catch(err=>{
@@ -85,26 +86,19 @@ assignCustomersToSales(){
 
 
 
-  // onActivate(event) {
-  //   console.log('Activate Event', event);
-  // }
+ 
 
 
 selectedCustomersList=[]
 unselectedCustomersList=[]
   onActivate(event) {
     if(event.type == "checkbox"){
-      // console.log(event.row);
-      // this.selectedCustomersList.push(event.row.id)
      if(this.selectedCustomersList.includes(event.row.id)){
         this.selectedCustomersList = this.selectedCustomersList.filter(e=> e !== event.row.id)
       }else{
          this.selectedCustomersList.push(event.row.id)
       }
-      // this.selectedCustomersList = this.selectedCustomersList.filter(e=> e !== event.row.id)
-      // this.unselectedCustomersList = this.unselectedCustomersList.filter(e=> e !==  event.row.id)
-      //  console.log(this.selectedCustomersList);
-      //  console.log(this.unselectedCustomersList);
+ 
        
     }
 }

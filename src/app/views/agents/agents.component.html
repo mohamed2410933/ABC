@@ -56,7 +56,7 @@
 
           <ngx-datatable-column
           *ngIf="isShowChecbox"
-            [width]="30"
+            [width]="80"
             [sortable]="false"
             [canAutoResize]="false"
             [draggable]="false"
@@ -69,7 +69,7 @@
               let-onCheckboxChangeFn="onCheckboxChangeFn"
 
             >
-              <input type="checkbox" [checked]="isSelected"  (change)="onCheckboxChangeFn($event)" />
+              <input class="checker" type="checkbox" [checked]="isSelected"  (change)="onCheckboxChangeFn($event)" />
             </ng-template>
           </ngx-datatable-column>
 
@@ -94,11 +94,35 @@
           </ngx-datatable-column>
           <ngx-datatable-column name="name">
             <ng-template ngx-datatable-header-template>
+              السيولة 
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row?.cash_type}}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="name">
+            <ng-template ngx-datatable-header-template>
               رقم التليفون
             </ng-template>
             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
               {{row?.phone }}
             </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="name">
+            <ng-template ngx-datatable-header-template>
+                السوق
+            </ng-template>
+            <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row?.market[0]?.name }}
+            </ng-template>
+          </ngx-datatable-column>
+          <ngx-datatable-column name="category" >
+            <ng-template ngx-datatable-header-template>
+              نوع التسجيل
+            </ng-template>
+            <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+              {{row?.registration_type }}
+          </ng-template>
           </ngx-datatable-column>
           <ngx-datatable-column name="name"  *ngIf="!isShowChecbox">
             <ng-template ngx-datatable-header-template>

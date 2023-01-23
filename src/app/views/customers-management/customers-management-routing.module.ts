@@ -32,7 +32,7 @@ const routes: Routes = [
     component: AddStatusComponent
   },
   {
-    path: 'customers/sendEmails/:id',
+    path: 'customers/sendEmails',
     component: SendEmailsComponent
   },
   {

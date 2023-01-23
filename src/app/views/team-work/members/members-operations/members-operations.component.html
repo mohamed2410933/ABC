@@ -45,10 +45,11 @@
                         
                         <select formControlName="validity" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.validity.errors }">
                           <option value="" selected disabled>Select</option>
-                          <ng-container *ngIf="userInfo?.roleId !== 6" >
+                          <ng-container *ngIf="userInfo?.roleId !== 6 && userInfo?.roleId !== 5" >
                             <option [value]="item.id" *ngFor="let item of RolesList">{{item['arabic-name'] }} </option>
                           </ng-container>
                           <option *ngIf="userInfo?.roleId == 6" [value]="3">{{'مسوق الكتروني'}} </option>
+                          <option *ngIf="userInfo?.roleId == 5" [value]="4">{{'وكيل عملاء'}} </option>
                         </select>
 
                         <div *ngIf="submitted && f['validity'].errors" class="invalid-feedback">

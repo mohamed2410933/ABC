@@ -20,40 +20,49 @@ export class SendEmailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute) { }
     sendEmailForm;
+    selectedCustomer
   ngOnInit(): void {
     this.sendEmailForm = this.formBuilder.group({
-      email: ["", Validators.required],    
-      discription: ["", Validators.required],
+      address: ["", Validators.required],
+      title: ["", Validators.required],    
+      data: ["", Validators.required],
     });
+    this.getAllCustomers(1);
   }
 
 
-  selectedCar: number;
 
-  cars = [
-      { id: 1, name: 'Volvo' },
-      { id: 2, name: 'Saab' },
-      { id: 3, name: 'Opel' },
-      { id: 4, name: 'Audi' },
-  ];
 
 
   public onSelectAll() {
-    const selected = this.cars.map(item => item.id);
-    this.sendEmailForm.get('email').patchValue(selected);
+    const selected = this.CustomersList.map(item => item.id);
+    // this.sendEmailForm.get('email').patchValue(selected);
+    this.selectedCustomer = selected
   }
   
   public onClearAll() {
-    this.sendEmailForm.get('email').patchValue([]);
+    // this.sendEmailForm.get('email').patchValue([]);
+    this.selectedCustomer = []
   }
 
   onSubmit(){
-    debugger
+    this.spinner.show()
     this.submitted = true;
-
     if (this.sendEmailForm.invalid) {
       return;
     }
+      let clientsIds= this.selectedCustomer;
+      this.viewService.sendEmail(clientsIds , this.sendEmailForm.value).then(res=>{
+      this.spinner.hide();
+      this.toastr.clear();
+      this.toastr.success(res['message'])
+    }).catch(err=>{
+      this.spinner.hide();
+      err.error.message ? this.toastr.error(err.error.message) : this.toastr.error('حدث خطأ في النظام')
+    })
+      
+    
+
   }
   get f(): { [key: string]: AbstractControl } {
     return this.sendEmailForm.controls;
@@ -62,5 +71,19 @@ export class SendEmailsComponent implements OnInit {
   onReset(): void {
     this.submitted = false;
     this.sendEmailForm.reset();
+  }
+
+  CustomersList
+  pageData
+  getAllCustomers(page, q = '') {
+    this.spinner.show();
+    this.viewService.GetAll('client/active',page, q).then(res => {
+      this.spinner.hide();
+      this.CustomersList = res['data'].data
+      this.pageData = res['data'];
+    }).catch(err => {
+      this.spinner.hide();
+      err.error.message ? this.toastr.error(err.error.message) : this.toastr.error('حدث خطأ في النظام')
+    })
   }
 }

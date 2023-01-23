@@ -55,7 +55,7 @@
                     اسم العميل	
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row?.client }}
+                    {{row?.name }}
                 </ng-template>
                 </ngx-datatable-column>
 
@@ -78,14 +78,14 @@
 
               
 
-                <ngx-datatable-column name="category" >
+                <!-- <ngx-datatable-column name="category" >
                   <ng-template ngx-datatable-header-template>
                     الفاعلية  
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
                     {{row?.efficacy }}
                 </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column> -->
                 <ngx-datatable-column name="category" >
                     <ng-template ngx-datatable-header-template>
                        الاستجابة  
@@ -134,7 +134,7 @@
                     المسوق
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row?.user }}
+                    {{row?.client_marketer_name }}
                 </ng-template>
                 </ngx-datatable-column>
           

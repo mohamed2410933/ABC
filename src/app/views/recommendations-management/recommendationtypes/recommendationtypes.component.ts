@@ -40,7 +40,6 @@ export class RecommendationtypesComponent implements OnInit {
     }).catch(err => {
       this.spinner.hide();
       err.error.message ? this.toastr.error(err.error.message) : this.toastr.error('حدث خطأ في النظام')
-
     })
   }
 

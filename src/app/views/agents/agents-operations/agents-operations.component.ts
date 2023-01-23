@@ -52,6 +52,7 @@ salesName
     }else{
       this.viewService.UnAssignCustomersToSales(this.selectedCustomersList).then(res=>{
         this.toastr.success('تم الحذف بنجاح');
+        window.location.reload()
         this.clientsSalesList = this.clientsSalesList.filter(x=>this.selectedCustomersList.find(e=>x.id !== e))
         this.selectedCustomersList = []
         // $('input:checkbox').removeAttr('checked');

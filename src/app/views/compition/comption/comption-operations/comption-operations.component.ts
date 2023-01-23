@@ -40,7 +40,7 @@ comptionId
       title: ["", Validators.required],       
       question: ["", Validators.required],       
       status: ["", Validators.required],       
-      market_id: ["", Validators.required],       
+      market_id: ["", !this.comptionId ? Validators.required : []],     
       photo: ["", !this.comptionId ? Validators.required : []],       
     });
   }
@@ -82,11 +82,12 @@ comptionId
 
 viewImgUrl
   getComptionById(id) {
+    // debugger
     this.viewService.ShowById('competitions' ,id).then(res => {
       this.comptionForm.get('title').setValue(res['data']['title']);
       this.comptionForm.get('question').setValue(res['data']['question']);
       this.comptionForm.get('status').setValue(res['data']['status']);
-      this.comptionForm.get('market_id').setValue(res['data']['market']['market_id']);
+      this.comptionForm.get('market_id').setValue(res['data']['market_id']);
       this.viewImgUrl = res['data']['image']
     }).catch(err => {
       err.error.message ? this.toastr.error(err.error.message) : this.toastr.error('حدث خطأ في النظام')

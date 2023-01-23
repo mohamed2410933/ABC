@@ -12,6 +12,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedPipesModule } from 'src/app/shared/pipes/shared-pipes.module';
 import { FollowMarkterComponent } from './follow-markter/follow-markter.component';
+import { MarksComponent } from './marks/marks.component';
+import { MyAgentsComponent } from './my-agents/my-agents.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { FollowMarkterComponent } from './follow-markter/follow-markter.componen
     MembersComponent,
     MembersOperationsComponent,
     FollowMarkterComponent,
+    MarksComponent,
+    MyAgentsComponent,
   ],
   imports: [
     CommonModule,

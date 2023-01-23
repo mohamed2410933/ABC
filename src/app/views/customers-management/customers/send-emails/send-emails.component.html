@@ -6,9 +6,9 @@
     </div>
    
     <div class="card-body">
-        <form [formGroup]="sendEmailForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="sendEmailForm" >
         <div class="form-group">
-            <label>البريد الكتروني</label>
+            <label>العملاء</label>
             <!-- <ng-select 
             [items]="SectorsList" 
             bindLabel="name"
@@ -25,7 +25,7 @@
              </ng-template>
            </ng-select> -->
 
-           <ng-select [items]="cars" 
+           <!-- <ng-select [items]="CustomersList" 
                 [multiple]="true"
                 bindLabel="name" 
                 bindValue="id" 
@@ -42,22 +42,83 @@
                     </div>
                 
                   </ng-template>
-           </ng-select>
+           </ng-select> -->
+
+           <ng-select 
+           [items]="CustomersList" 
+           bindLabel="name"
+           bindValue="id" 
+           [multiple]="true"
+           placeholder="بحث....." 
+           [ngModelOptions]="{standalone: true}" 
+           #client
+           (keyup)="getAllCustomers(1,client.searchTerm)"
+           [(ngModel)]="selectedCustomer"
+           >
+           <ng-template ng-header-tmp>
+
+            <div>
+              <button class="btn btn-link"
+                      (click)="onSelectAll()">تحديد الكل </button>
+              <button class="btn btn-link"
+                      (click)="onClearAll()">مسح الكل</button>
+            </div>
+        
+          </ng-template>
+            <ng-template ng-option-tmp let-item="item"  let-item$="item$" let-index="index">
+             {{item?.name}}
+            </ng-template>
+          </ng-select>
+
+
+
+          </div>
+          <div class="form-row row">
+            <div class="form-group col">
+                <label>عنوان الايميل</label>
+                <input
+                  type="text"
+                  formControlName="address"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['address'].errors }"
+                  placeholder="عنوان الايميل"
+                />
+                <div *ngIf="submitted && f['address'].errors" class="invalid-feedback">
+                  <div *ngIf="f['address'].errors['required']">عنوان الايميل مطلوب </div>
+                </div>
+              </div>
+            
+          </div>
+          <div class="form-row row">
+            <div class="form-group col">
+                <label>عنوان الرسالة</label>
+                <input
+                  type="text"
+                  formControlName="title"
+                  class="form-control"
+                  [ngClass]="{ 'is-invalid': submitted && f['title'].errors }"
+                  placeholder="عنوان الرسالة"
+                />
+                <div *ngIf="submitted && f['title'].errors" class="invalid-feedback">
+                  <div *ngIf="f['title'].errors['required']">عنوان الرسالة مطلوب</div>
+                </div>
+              </div>
+            
           </div>
           <div class="form-row row">
            
             <div class="form-group col">
                 <label>* نص الرسالة</label>
-                <textarea class="form-control" formControlName="discription"  rows="3"></textarea>
-                <div *ngIf="submitted && f['discription'].errors" class="invalid-feedback">
-                  <div *ngIf="f['discription'].errors['required']"> نص الرسالة مطلوب</div>
+                <textarea class="form-control" formControlName="data"  rows="3"></textarea>
+                <div *ngIf="submitted && f['data'].errors" class="invalid-feedback">
+                  <div *ngIf="f['data'].errors['required']"> نص الرسالة مطلوب</div>
                 </div>
               </div>
           </div>
 
 
           <div class="form-group">
-            <button  type="submit" class="btn btn-primary my-2">إضافة</button>
+            <button  type="button" class="btn btn-primary my-2" (click)="onSubmit()">إرسال</button>
               <button
                 type="button"
                 (click)="onReset()"

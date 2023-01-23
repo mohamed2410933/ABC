@@ -10,9 +10,13 @@
     <div class="separator-breadcrumb border-top"></div>
   
     <div class="row">
-      <div class="col-2" *ngIf="userInfo?.roleId !== 4 && userInfo?.roleId !== 5"  >
+      <div class="col-2" *ngIf="userInfo?.roleId !== 4 && userInfo?.roleId !== 5 && userInfo?.roleId !== 3"  >
         <!-- {{userInfo?.roleId}} -->
        <a routerLink="/customersManagement/customers/operations/new"><button mat-raised-button  class="btn btn-primary my-2">إضافة جديدة</button></a>
+      </div>
+      <div class="col-2" *ngIf="userInfo?.roleId === 3"  >
+        <!-- {{userInfo?.roleId}} -->
+       <button mat-raised-button  class="btn btn-primary my-2" (click)="openAddClient()">إضافة جديدة</button>
       </div>
       <div class="col-6">
         <div class="search-bar my-2 ml-auto ">
@@ -21,6 +25,11 @@
       </div>
       <div class="col-md-2 col-sm-12">
         <button mat-raised-button  class="btn btn-primary my-2" (click)="getAllCustomers(1,filterData)">بحث في كل الصفحات</button>
+       </div>
+       <div class="col-md-2" *ngIf="userInfo?.roleId === 1 || userInfo?.roleId === 5">
+        <button type="button"  class="btn btn-secondary btn-rounded m-1"  (click)="toSendEmails()">
+          <i class="fa fa-envelope"></i>   ارسال بريد الكتروني
+        </button>
        </div>
       </div>
   
@@ -68,6 +77,22 @@
                     {{row?.name }}
                 </ng-template>
                 </ngx-datatable-column>
+                <ngx-datatable-column name="name" >
+                  <ng-template ngx-datatable-header-template>
+                  السيولة
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.cash_type }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="name" >
+                  <ng-template ngx-datatable-header-template>
+                  البريد الالكتروني
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.email }}
+                </ng-template>
+                </ngx-datatable-column>
 
                 <ngx-datatable-column name="category" >
                   <ng-template ngx-datatable-header-template>
@@ -96,7 +121,7 @@
                 </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="category" *ngIf="userInfo.roleId !== 4">
+                <!-- <ngx-datatable-column name="category" *ngIf="userInfo.roleId !== 4">
                   <ng-template ngx-datatable-header-template>
                     الفاعلية
                   </ng-template>
@@ -104,7 +129,7 @@
                    <span *ngIf="row?.bouquet">عميل فعال</span> 
                    <span *ngIf="!row?.bouquet">عميل غير فعال</span> 
                 </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column> -->
              
            
                 <ngx-datatable-column name="category" >
@@ -112,7 +137,18 @@
                     الحالة
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row.status }}
+                    {{row?.status == 'active' ? 'نشط' : 'غير نشط' }}
+                    <!-- <span *ngIf="row?.bouquet">عميل فعال</span>  -->
+                    <!-- <span *ngIf="!row?.bouquet">عميل غير فعال</span>  -->
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    المستوي
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                   <span *ngIf="row?.level">{{row?.level}}</span> 
+                  <span *ngIf="!row?.level">-</span>
                 </ng-template>
                 </ngx-datatable-column>
            
@@ -182,9 +218,7 @@
                   </ng-template>
                   <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex"
                   ngx-datatable-cell-template>   
-                  <!-- <button type="button"  class="btn btn-secondary btn-rounded m-1"  (click)="toSendEmails(row.id)">
-                    <i class="fa fa-envelope"></i>
-                  </button>      -->
+                      
                   <button type="button"  class="btn btn-secondary btn-rounded m-1" title="تاريخ خدمة العميل" (click)="fun(row.id)">
                     <i class="fa fa-eye"></i>
                   </button>
@@ -277,14 +311,15 @@
                 </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="category" >
+                <!-- <ngx-datatable-column name="category" >
                   <ng-template ngx-datatable-header-template>
                     الفاعلية  
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
                     {{row?.efficacy }}
                 </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column> -->
+
                 <ngx-datatable-column name="category" >
                   <ng-template ngx-datatable-header-template>
                     الحالة

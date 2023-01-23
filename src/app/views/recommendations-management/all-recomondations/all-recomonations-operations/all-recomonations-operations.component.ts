@@ -19,8 +19,9 @@ export class AllRecomonationsOperationsComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private router: Router,
     private route: ActivatedRoute) { }
-recomondationForm;
-recomondationId
+      recomondationForm;
+      recomondationId;
+      selectedRec
   ngOnInit(): void {
     this.recomondationId = this.route.snapshot.paramMap.get('id');
     if(this.recomondationId){
@@ -42,6 +43,7 @@ recomondationId
     });
     this.getAllStocks(1);
     this.getAllMarkets(1);
+    this.getAllRecommendationsTypes(1);
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -72,7 +74,8 @@ recomondationId
     }
     this.spinner.show();
     // this.recomondationForm.get('stockId').setValue(this.selectedStock);
-    this.recomondationForm.value.stockId = this.selectedStock
+    this.recomondationForm.value.stockId = this.selectedStock;
+    this.recomondationForm.value.recomondationTypeId = this.selectedRec
     this.viewService.addEditRecomondation(this.recomondationForm.value , +id).then(res => {
       this.spinner.hide();
       this.toastr.clear();
@@ -108,7 +111,9 @@ recomondationId
       // console.log(res['data']);
       this.selectedStock = res['data']['stock']['id']
       // this.recomondationForm.get('stockId').setValue(res['data']['stock']['id']);
-      this.recomondationForm.get('recomondationTypeId').setValue(res['data']['recommendationType_id']);
+      // this.recomondationForm.get('recomondationTypeId').setValue(res['data']['recommendationType_id']);
+      this.selectedRec =  res['data']['recommendationType_id'];
+      // this.recomondationForm.get('recomondationTypeId').setValue(res['data']['recommendationType_id']);
       this.recomondationForm.get('purchasingPrice').setValue(res['data']['purchasing_price']);
       this.recomondationForm.get('sellingPrice').setValue(res['data']['selling_price']);
       this.recomondationForm.get('stopLossPrice').setValue(res['data']['stop_loss_price']);
@@ -141,5 +146,20 @@ recomondationId
     })
   }
 
+
+  RecommendationsTypesList
+  pageData
+  getAllRecommendationsTypes(page =1, q='') {
+    // 
+    this.spinner.show();
+    this.viewService.GetAllRecommendationsTypes(page , q).then(res => {
+      this.spinner.hide();
+      this.RecommendationsTypesList = res['data']
+      this.pageData = res['data'];
+    }).catch(err => {
+      this.spinner.hide();
+      err.error.message ? this.toastr.error(err.error.message) : this.toastr.error('حدث خطأ في النظام')
+    })
+  }
 
 }
