@@ -33,7 +33,7 @@
               [columnMode]="'force'" 
               [headerHeight]="50"
               [footerHeight]="50" 
-              [rowHeight]="50" 
+              [rowHeight]="'auto'" 
               [scrollbarV]="true"
               [virtualization]="false"
               [scrollbarH]="true"
@@ -64,7 +64,7 @@
               (page)="getAllRecommendations($event.offset + 1)"  -->
 
        
-                <ngx-datatable-column name="name" [width]="80">
+                <ngx-datatable-column name="name" >
                   <ng-template ngx-datatable-header-template>
                     ID
                   </ng-template>
@@ -73,7 +73,7 @@
                     {{rowIndex+1}}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="name" [width]="200">
+                <ngx-datatable-column name="name">
                   <ng-template ngx-datatable-header-template>
                     اسم السهم
                   </ng-template>
@@ -81,7 +81,7 @@
                     {{row.name }}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="category" [width]="100">
+                <ngx-datatable-column name="category">
                   <ng-template ngx-datatable-header-template>
                     الكود
                   </ng-template>
@@ -89,7 +89,7 @@
                     {{row.code }}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="category" [width]="200">
+                <ngx-datatable-column name="category">
                   <ng-template ngx-datatable-header-template>
                     نوع السهم
                   </ng-template>
@@ -97,7 +97,7 @@
                     {{row.type }}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="category" [width]="100">
+                <ngx-datatable-column name="category">
                   <ng-template ngx-datatable-header-template>
                     القطاع التابع له
                   </ng-template>

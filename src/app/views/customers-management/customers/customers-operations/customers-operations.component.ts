@@ -36,7 +36,7 @@ userInfo
       email: ["", Validators.required],       
       password: ["", !this.customerId ?  Validators.required : []],       
       confirmPassword: ["", !this.customerId ?  Validators.required : []],       
-      package: ["", Validators.required], 
+      package: [""], 
       market_id: [""], 
       status: ["", Validators.required], 
       start_date: [""], 
@@ -80,12 +80,12 @@ userInfo
       this.spinner.hide();
       this.toastr.clear();
       this.toastr.success(res['message']);
-      if(this.userInfo.roleId !== 6){
+      // if(this.userInfo.roleId !== 6){
         this.router.navigateByUrl('/customersManagement/customers');
-      }else{
-        this.router.navigateByUrl('/teamWork/follow-markter');
+      // }else{
+        // this.router.navigateByUrl('/teamWork/follow-markter');
         
-      }
+      // }
       // console.log(res);
     }).catch(err => {
       this.spinner.hide();

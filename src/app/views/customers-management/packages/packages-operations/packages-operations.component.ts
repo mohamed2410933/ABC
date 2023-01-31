@@ -35,7 +35,7 @@ packageId
       packageName: ["", Validators.required],    
       avaliabeDays: ["", Validators.required],
       price: ["", Validators.required],       
-      discription: ["", Validators.required],       
+      discription: [""],       
       isShow: [""],     
       market_id: ["", Validators.required],     
       photo: ["", !this.packageId ?  Validators.required : []], 
@@ -67,10 +67,13 @@ imgUrl;
     
     this.viewService.ShowById('bouquets', id).then(res => {
     //  console.log(res['data']);
+    // console.log(res['data']);
+
      this.addPackageForm.get('packageName').setValue(res['data']['name']);
      this.addPackageForm.get('avaliabeDays').setValue(res['data']['days']);
      this.addPackageForm.get('price').setValue(res['data']['price']);
      this.addPackageForm.get('discription').setValue(res['data']['description']);
+     this.addPackageForm.get('market_id').setValue(res['data']['market_id']);
      this.addPackageForm.get('isShow').setValue(res['data']['is_show'] == 'show' ? 'show' : '');
     //  this.addPackageForm.get('photo').setValue(res['data']['image']);
      this.imgUrl = res['data']['image'];

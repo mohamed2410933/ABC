@@ -32,7 +32,7 @@
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50" 
-              [rowHeight]="50" 
+              [rowHeight]="'auto'" 
               [scrollbarV]="true"
               [scrollbarH]="true"
               [virtualization]="false"
@@ -100,7 +100,7 @@
                 </ngx-datatable-column>
               
     
-                <ngx-datatable-column name="operations" [width]="200" >
+                <ngx-datatable-column name="operations" >
                   <ng-template ngx-datatable-header-template>
                     خيارات
                   </ng-template>

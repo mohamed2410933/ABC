@@ -31,7 +31,7 @@
               [columnMode]="'force'" 
               [headerHeight]="50"
               [footerHeight]="50" 
-              [rowHeight]="50" 
+              [rowHeight]="'auto'" 
               [scrollbarV]="true"
               [virtualization]="false"
               [scrollbarH]="true"
@@ -47,7 +47,7 @@
 
     
               
-                <ngx-datatable-column name="name" [width]="80">
+                <ngx-datatable-column name="name" >
                   <ng-template ngx-datatable-header-template>
                     ID
                   </ng-template>
@@ -56,7 +56,7 @@
                     {{rowIndex+1}}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="name" [width]="100">
+                <ngx-datatable-column name="name" >
                   <ng-template ngx-datatable-header-template>
                     اسم القطاع
                   </ng-template>
@@ -64,7 +64,7 @@
                     {{row.name }}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="description" [width]="300">
+                <ngx-datatable-column name="description" >
                   <ng-template ngx-datatable-header-template>
                     وصف الخدمة	
                   </ng-template>

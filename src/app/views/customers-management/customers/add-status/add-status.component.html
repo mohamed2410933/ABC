@@ -63,7 +63,7 @@
         [columnMode]="'force'" 
         [headerHeight]="50"
         [footerHeight]="50" 
-        [rowHeight]="50" 
+        [rowHeight]="'auto'" 
         [scrollbarV]="true"
         [virtualization]="false"
         [scrollbarH]="true"
@@ -79,7 +79,7 @@
 
        
 
-          <ngx-datatable-column name="subtitle" [width]="60" [maxWidth]="200">
+          <ngx-datatable-column name="subtitle" >
             <ng-template ngx-datatable-header-template>
             ID
             </ng-template>
@@ -92,7 +92,7 @@
         </ng-template>
           </ngx-datatable-column>
 
-          <ngx-datatable-column name="subtitle" [width]="160" [maxWidth]="300">
+          <ngx-datatable-column name="subtitle" >
             <ng-template ngx-datatable-header-template>
              حالة الاستجابة
             </ng-template>
@@ -100,7 +100,7 @@
               {{row?.response}}
           </ng-template>
           </ngx-datatable-column>
-          <ngx-datatable-column name="subtitle" [width]="260" [maxWidth]="600">
+          <ngx-datatable-column name="subtitle" >
             <ng-template ngx-datatable-header-template>
               توضيح الاستجابة
             </ng-template>
@@ -108,7 +108,7 @@
               {{row?.note}}
           </ng-template>
           </ngx-datatable-column>
-          <!-- <ngx-datatable-column name="operations" [width]="160" [maxWidth]="400" *ngIf="userInfo?.roleId !== 5">
+          <!-- <ngx-datatable-column name="operations"  *ngIf="userInfo?.roleId !== 5">
             <ng-template ngx-datatable-header-template>
               خيارات
             </ng-template>

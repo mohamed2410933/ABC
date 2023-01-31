@@ -33,7 +33,7 @@
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50" 
-              [rowHeight]="50" 
+              [rowHeight]="'auto'" 
               [scrollbarV]="true"
               [virtualization]="false"
               [scrollbarH]="true"
@@ -47,7 +47,7 @@
               (page)="getAllRecommendations($event.offset + 1)" 
               >
             
-              <ngx-datatable-column name="name" [width]="80">
+              <ngx-datatable-column name="name" >
                 <ng-template ngx-datatable-header-template>
                   ID
                 </ng-template>

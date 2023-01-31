@@ -93,9 +93,9 @@
                     <option [value]="item.id" *ngFor="let item of PackagesList">{{item?.name}}</option>
                 
                   </select>
-                <div *ngIf="submitted && f['package'].errors" class="invalid-feedback">
+                <!-- <div *ngIf="submitted && f['package'].errors" class="invalid-feedback">
                   <div *ngIf="f['package'].errors['required']"> الباقة مطلوبة</div>
-                </div>
+                </div> -->
               </div>
                 <div class="form-group col" *ngIf="userInfo?.roleId !== 6">
                     <label>* السوق</label>

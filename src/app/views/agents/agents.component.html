@@ -47,7 +47,7 @@
     <div class="col-md-12">
       <div class="card o-hidden">
         <ngx-datatable style="height: calc(160vh - 270px); box-shadow: none" [columnMode]="'force'" [headerHeight]="50"
-          [footerHeight]="50" [rowHeight]="50" [scrollbarV]="true" [virtualization]="false" #table
+          [footerHeight]="50"  [rowHeight]="'auto'"  [scrollbarV]="true" [virtualization]="false" #table
           [limit]="pageData?.per_page" [rows]="agentsList| fillter:filterData" class="material" [externalPaging]="true"
           [count]="pageData?.total" [offset]="pageData?.current_page - 1"
            (page)="getAllAgents($event.offset + 1)"

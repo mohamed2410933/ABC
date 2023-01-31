@@ -32,7 +32,7 @@
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50" 
-              [rowHeight]="50" 
+              [rowHeight]="'auto'" 
               [scrollbarV]="true"
               [scrollbarH]="true"
               [virtualization]="false"
@@ -47,7 +47,7 @@
               >
        
               
-                <ngx-datatable-column name="photo" [width]="40" >
+                <ngx-datatable-column name="photo">
                   <ng-template ngx-datatable-header-template>
                     صورة
                   </ng-template>
@@ -55,7 +55,7 @@
                         <img height="32px" width="32px" style="border-radius: 4px" [src]="row?.image" alt="">
                     </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="name"  [width]="40">
+                <ngx-datatable-column name="name"  >
                   <ng-template ngx-datatable-header-template>
                  ID
                   </ng-template>

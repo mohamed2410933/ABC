@@ -10,11 +10,11 @@
     <div class="separator-breadcrumb border-top"></div>
   
     <div class="row">
-      <div class="col-2" *ngIf="userInfo?.roleId !== 4 && userInfo?.roleId !== 5 && userInfo?.roleId !== 3"  >
+      <div class="col-2" *ngIf="userInfo?.roleId !== 4 && userInfo?.roleId !== 5 && userInfo?.roleId !== 3 && userInfo?.roleId !== 6"  >
         <!-- {{userInfo?.roleId}} -->
        <a routerLink="/customersManagement/customers/operations/new"><button mat-raised-button  class="btn btn-primary my-2">إضافة جديدة</button></a>
       </div>
-      <div class="col-2" *ngIf="userInfo?.roleId === 3"  >
+      <div class="col-2" *ngIf="userInfo?.roleId === 3 "  >
         <!-- {{userInfo?.roleId}} -->
        <button mat-raised-button  class="btn btn-primary my-2" (click)="openAddClient()">إضافة جديدة</button>
       </div>
@@ -44,7 +44,7 @@
               [columnMode]="'force'"
               [headerHeight]="50"
               [footerHeight]="50" 
-              [rowHeight]="50" 
+              [rowHeight]="'auto'" 
               [scrollbarV]="true"
               [scrollbarH]="true"
               [virtualization]="false"
@@ -60,7 +60,7 @@
           
         
 
-                <ngx-datatable-column name="name" >
+                <ngx-datatable-column name="name"  >
                   <ng-template ngx-datatable-header-template>
                   ID
                   </ng-template>
@@ -69,11 +69,11 @@
                     {{rowIndex+1}}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="name" >
+                <ngx-datatable-column name="name"  >
                   <ng-template ngx-datatable-header-template>
                     اسم العميل	
                   </ng-template>
-                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                  <ng-template  let-value="value" let-row="row" ngx-datatable-cell-template>
                     {{row?.name }}
                 </ng-template>
                 </ngx-datatable-column>
@@ -102,15 +102,23 @@
                     {{row?.phone }}
                 </ng-template>
                 </ngx-datatable-column>
-
                 <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    السوق
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.market[0]?.name }}
+                </ng-template>
+                </ngx-datatable-column>
+
+                <!-- <ngx-datatable-column name="category" >
                   <ng-template ngx-datatable-header-template>
                      الاستجابة  
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
                     {{row?.phone }}
                 </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column> -->
 
                 <ngx-datatable-column name="category" *ngIf="userInfo.roleId === 4">
                   <ng-template ngx-datatable-header-template>
@@ -152,7 +160,7 @@
                 </ng-template>
                 </ngx-datatable-column>
            
-                <ngx-datatable-column name="category" >
+                <ngx-datatable-column name="category"  *ngIf="userInfo.roleId !== 6">
                   <ng-template ngx-datatable-header-template>
                     نوع التسجيل
                   </ng-template>
@@ -194,7 +202,7 @@
                     {{row.created_at | date }}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="category" >
+                <ngx-datatable-column name="category" *ngIf="userInfo.roleId !== 6" >
                   <ng-template ngx-datatable-header-template>
                     تاريخ بداية الاشتراك	
                   </ng-template>
@@ -202,7 +210,7 @@
                     {{row.start_date | date }}
                 </ng-template>
                 </ngx-datatable-column>
-                <ngx-datatable-column name="category" >
+                <ngx-datatable-column name="category" *ngIf="userInfo.roleId !== 6">
                   <ng-template ngx-datatable-header-template>
                     تاريخ نهاية الاشتراك	
                   </ng-template>
@@ -212,7 +220,7 @@
                 </ngx-datatable-column>
           
     
-                <ngx-datatable-column name="operations" [width]="300" *ngIf="userInfo?.roleId !== 4">
+                <ngx-datatable-column name="operations" *ngIf="userInfo?.roleId !== 4">
                   <ng-template ngx-datatable-header-template>
                     خيارات
                   </ng-template>
@@ -237,7 +245,7 @@
                 </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="operations" [width]="100" *ngIf="userInfo?.roleId == 4">
+                <ngx-datatable-column name="operations"  *ngIf="userInfo?.roleId == 4">
                   <ng-template ngx-datatable-header-template>
                     خيارات
                   </ng-template>
@@ -268,7 +276,7 @@
               [columnMode]="'force'" 
               [headerHeight]="50"
               [footerHeight]="50" 
-              [rowHeight]="50" 
+              [rowHeight]="auto" 
               [scrollbarV]="true"
               [virtualization]="false"
               [scrollbarH]="true"
@@ -302,14 +310,14 @@
                 </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="category" >
+                <!-- <ngx-datatable-column name="category" >
                   <ng-template ngx-datatable-header-template>
                      الاستجابة  
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
                     {{row?.phone }}
                 </ng-template>
-                </ngx-datatable-column>
+                </ngx-datatable-column> -->
 
                 <!-- <ngx-datatable-column name="category" >
                   <ng-template ngx-datatable-header-template>
@@ -349,7 +357,7 @@
                 </ngx-datatable-column>
           
     
-                <ngx-datatable-column name="operations" [width]="300" *ngIf="userInfo?.roleId !== 4">
+                <ngx-datatable-column name="operations"  *ngIf="userInfo?.roleId !== 4">
                   <ng-template ngx-datatable-header-template>
                     خيارات
                   </ng-template>
@@ -374,7 +382,7 @@
                 </ng-template>
                 </ngx-datatable-column>
 
-                <ngx-datatable-column name="operations" [width]="100" *ngIf="userInfo?.roleId == 4">
+                <ngx-datatable-column name="operations"  *ngIf="userInfo?.roleId == 4">
                   <ng-template ngx-datatable-header-template>
                     خيارات
                   </ng-template>
@@ -402,14 +410,14 @@
               [columnMode]="'force'" 
               [headerHeight]="50"
               [footerHeight]="50" 
-              [rowHeight]="50" 
+              [rowHeight]="auto" 
               [scrollbarV]="true"
               [virtualization]="false"
               [scrollbarH]="true"
               [rows]="clientsMarketMonth"
               #table
               >
-                <ngx-datatable-column name="id"  [width]="100">
+                <ngx-datatable-column name="id"  >
                   <ng-template ngx-datatable-header-template>
                   ID
                   </ng-template>
@@ -424,6 +432,22 @@
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
                     {{row?.client_name }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="client" >
+                  <ng-template ngx-datatable-header-template>
+                    السيولة
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.cash_type}}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    السوق
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row?.market ? row?.market[0]?.name  : '-'}}
                 </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="category" >

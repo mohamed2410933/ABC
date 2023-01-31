@@ -34,7 +34,7 @@
               [columnMode]="'force'" 
               [headerHeight]="50"
               [footerHeight]="50" 
-              [rowHeight]="50" 
+              [rowHeight]="'auto'" 
               [scrollbarV]="true"
               [virtualization]="false"
               [scrollbarH]="true"
@@ -59,7 +59,7 @@
               [offset]="pageData?.current_page - 1"
               (page)="getAllPackages($event.offset + 1)" -->
           
-              <ngx-datatable-column name="photo" [width]="40" >
+              <ngx-datatable-column name="photo"  >
                 <ng-template ngx-datatable-header-template>
                   صورة
                 </ng-template>
@@ -67,7 +67,7 @@
                       <img height="32px" width="32px" style="border-radius: 4px" [src]="row?.image" alt="">
                   </ng-template>
               </ngx-datatable-column>
-              <ngx-datatable-column name="name"  [width]="40">
+              <ngx-datatable-column name="name"  >
                 <ng-template ngx-datatable-header-template>
                ID
                 </ng-template>
@@ -90,7 +90,7 @@
                     السعر
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row?.price}} جنية مصري
+                    {{row?.price}} ريال 
                 </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="category"  >
@@ -118,7 +118,9 @@
                   <button type="button" class="btn btn-primary btn-rounded m-1"  (click)="toEditPackage(row.id)">
                     <i class="fa fa-edit"></i>
                   </button>
-                
+                  <button type="button" class="btn btn-danger btn-rounded m-1" (click)="deletePackage(row.id , rowIndex )">
+                    <i class="fa fa-trash"></i>
+                  </button>
                 </ng-template>
                 </ngx-datatable-column>
     

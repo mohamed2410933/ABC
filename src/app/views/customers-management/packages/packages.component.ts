@@ -24,6 +24,8 @@ export class PackagesComponent implements OnInit {
   ngOnInit() {
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
     this.getAllPackages(1)
+    this.checkDelete()
+
   }
 
 
@@ -47,6 +49,21 @@ export class PackagesComponent implements OnInit {
   }
 
 
+  roleIndex
+  deletePackage(id, index) {
+    this.roleIndex = index
+    this.viewService.PopupDeletition('bouquets', id);
+  }
+  checkDelete() {
+    this.viewService.deleteStatus.subscribe((value) => {
+      if (value.status) {
+        this.PackagesList = this.PackagesList.slice(0);
+        this.PackagesList.splice(this.roleIndex, 1);
+      }
+    });
+
+
+  }
 
 
 }

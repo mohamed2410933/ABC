@@ -67,3 +67,13 @@ body {
     height: 80px;
 }
 
+.datatable-body-cell-label , .datatable-header-cell{
+font-size: 15px !important;
+font-weight: bolder;
+}
+
+.ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-cell, .ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-group-cell {
+    /* overflow: hidden;
+    text-overflow: ellipsis; */
+    white-space: pre-wrap !important;
+}

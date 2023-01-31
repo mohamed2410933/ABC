@@ -147,6 +147,9 @@
                     <option selected disabled>أختر</option>
                     <option [value]="item.id" *ngFor="let item of MarketsList">{{item?.name}}</option>
                   </select>
+                  <!-- <div *ngIf="submitted && f['market_id'].errors" class="invalid-feedback">
+                    <div *ngIf="f['market_id'].errors['required']"> الحالة  مطلوبة</div>
+                  </div> -->
               </div>
                 <div class="form-group col">
                     <label>تاريخ شراءالوصية</label>
