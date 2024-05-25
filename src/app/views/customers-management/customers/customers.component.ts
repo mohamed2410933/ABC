@@ -53,6 +53,7 @@ export class CustomersComponent implements OnInit {
 
   agentAdminCustomers = []
   GetCustomersByAgentAdminId() {
+    debugger
     this.spinner.show()
     this.viewService.GetCustomersByAgentAdminId(this.userInfo.id).then(res => {
       this.spinner.hide();

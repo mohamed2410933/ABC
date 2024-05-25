@@ -33,10 +33,10 @@
             <ngx-datatable style="height: calc(160vh - 270px); box-shadow: none" [columnMode]="'force'" [headerHeight]="50"
               [footerHeight]="50"  [rowHeight]="'auto'"  [scrollbarV]="true" [virtualization]="false" #table
               [limit]="pageData?.per_page" 
-              [rows]="clientsSalesList| fillter:filterData" class="material" 
+              [rows]="clientsSalesList" class="material" 
              
               [count]="pageData?.total" [offset]="pageData?.current_page - 1"
-              (page)="getAllClientsForSelse($event.offset + 1)"
+             
               (activate)="onActivate($event)"
                
                >

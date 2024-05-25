@@ -17,24 +17,20 @@ export class AgentsOperationsComponent implements OnInit {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    public route: ActivatedRoute) { }
 salesId
 salesName
   ngOnInit(): void {
-    this.salesId = this.route.snapshot.paramMap.get('id');
     this.salesName = this.route.snapshot.paramMap.get('name');
-    if (this.salesId) {
-      this.getAllClientsForSelse(this.salesId , 1)
-
-    }
+      this.getAllClientsForSelse();
   }
   filterData
   pageData
   clientsSalesList=[]
-  getAllClientsForSelse(id? , page?){
-    // debugger
+  getAllClientsForSelse(){
+    this.salesId = this.route.snapshot.paramMap.get('id');
     this.spinner.show();
-    this.viewService.ShowById('assign-agent-customer/sales-client' , id).then(res => {
+    this.viewService.ShowById('assign-agent-customer/sales-client' , this.salesId).then(res => {
       this.spinner.hide();
       this.clientsSalesList = res['data'];
       this.pageData = res['data'];
