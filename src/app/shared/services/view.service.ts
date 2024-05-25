@@ -78,12 +78,19 @@ export class ViewService {
   }
   //=============================================================================================
   public Delete(type, id) {
+  
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
     let headers: HttpHeaders = new HttpHeaders();
     headers = headers.append('Accept', 'application/json');
     headers = headers.append('Authorization', 'Bearer ' + this.userInfo['token']);
+    console.log(this.userInfo['token']);
     headers = headers.append('token', this.userInfo['token']);
+    if(type == "clients"){
+      return this.http.post(this.apiUrl + `admin/${type}/${id}`, null,{ headers });
+    }else{
       return this.http.delete(this.apiUrl + `admin/${type}/${id}`, { headers });
+
+    }
   }
   //=============================================================================================
   public GetAboutUsData() {
@@ -551,6 +558,7 @@ export class ViewService {
 }
  //=============================================================================================
  public addEditCustomer(form, id) {
+
   this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
   const formdata = new FormData();
   let headers: HttpHeaders = new HttpHeaders();
