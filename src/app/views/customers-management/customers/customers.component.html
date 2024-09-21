@@ -199,7 +199,7 @@
                     تاريخ الانشاء	
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row.created_at | date }}
+                    {{row.created_at |  date : 'MMM d, y, h:mm a'  }}
                 </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="category" *ngIf="userInfo.roleId !== 6" >
@@ -207,7 +207,7 @@
                     تاريخ بداية الاشتراك	
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row.start_date | date }}
+                    {{row.start_date |  date : 'MMM d, y, h:mm a'  }}
                 </ng-template>
                 </ngx-datatable-column>
                 <ngx-datatable-column name="category" *ngIf="userInfo.roleId !== 6">
@@ -215,7 +215,7 @@
                     تاريخ نهاية الاشتراك	
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
-                    {{row.end_date | date }}
+                    {{row.end_date |  date : 'MMM d, y, h:mm a'  }}
                 </ng-template>
                 </ngx-datatable-column>
           
@@ -334,6 +334,22 @@
                   </ng-template>
                   <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
                     {{row.status }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    الاستجابة
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.AssignComment?.response ?? 'لا يوجد استجابة' }}
+                </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="category" >
+                  <ng-template ngx-datatable-header-template>
+                    نص الاستجابة
+                  </ng-template>
+                  <ng-template   let-value="value" let-row="row" ngx-datatable-cell-template>
+                    {{row.AssignComment?.note ?? 'لا يوجد رد' }}
                 </ng-template>
                 </ngx-datatable-column>
            

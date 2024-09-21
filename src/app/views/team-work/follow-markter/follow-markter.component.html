@@ -40,6 +40,12 @@
               [scrollbarH]="true"
               [rows]="CustomersList | fillter:filterData"
               #table
+              [limit]="pageData?.per_page" 
+              class="material"
+              [externalPaging]="true"
+              [count]="pageData?.total"
+              [offset]="pageData?.current_page - 1"
+              (page)="getAllCustomers($event.offset + 1)" 
               >
                 <ngx-datatable-column name="id" >
                   <ng-template ngx-datatable-header-template>

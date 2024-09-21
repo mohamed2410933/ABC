@@ -77,6 +77,7 @@ export class SigninComponent implements OnInit {
             this.loginForm.value.roleName = res['data'].user.role_name;
             localStorage.setItem('userInfo' , JSON.stringify(this.loginForm.value))
             this.spinner.hide();
+            localStorage.setItem('forceLogout' , 'forceLogout');
             this.router.navigateByUrl('/dashboard');
            
         }).catch(err=>{

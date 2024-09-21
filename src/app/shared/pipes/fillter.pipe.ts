@@ -11,43 +11,46 @@
 
 // }
 
-
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
+import { ViewService } from "../services/view.service";
 
 @Pipe({
-  name: 'fillter'
+  name: "fillter",
 })
 export class FillterPipe implements PipeTransform {
-
   filteredProducts;
-  
+    
+    constructor(public viewService: ViewService){}
   transform(items: any[], filterdata: any): any {
     // console.log(filterdata);
     // console.log(items);
-    
+    this.viewService.checkForceLogout();
+
     if (filterdata) {
       filterdata = filterdata.toLowerCase();
     } else {
-       return this.filteredProducts = [...items];
+      if (items) return (this.filteredProducts = [...items]);
+    }
+    let columns;
+    if (items) {
+      columns = Object.keys(items[0]);
+      if (!columns.length) {
+        return;
+      }
     }
 
-    const columns = Object.keys(items[0]);
-    if (!columns.length) {
-      return;
-    }
-
-    const rows = items.filter(function(d) {
+    const rows = items?.filter(function (d) {
       for (let i = 0; i <= columns.length; i++) {
         const column = columns[i];
-        if (d[column] && d[column].toString().toLowerCase().indexOf(filterdata) > -1) {
+        if (
+          d[column] &&
+          d[column].toString().toLowerCase().indexOf(filterdata) > -1
+        ) {
           return true;
         }
       }
     });
     this.filteredProducts = rows;
-    return this.filteredProducts ;
+    return this.filteredProducts;
   }
-     
-  
-
 }

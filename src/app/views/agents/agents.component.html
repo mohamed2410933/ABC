@@ -6,7 +6,7 @@
         <span class="mx-2">العملاء</span>
 
       </div>
-      <mat-chip class="mb-3 assign" (click)="getAllAgents() ; selectedItem= 0">
+      <mat-chip class="mb-3 assign" (click)="getAllAgents(1) ; selectedItem= 0">
         تعيين وكيل ل عملاء محتملين
       </mat-chip>
       <mat-chip-list aria-label="Dog selection">
@@ -137,7 +137,7 @@
               تاريخ الإنشاء
             </ng-template>
             <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-              {{row.created_at | date }}
+              {{row.created_at | date : 'MMM d, y, h:mm a' }}
             </ng-template>
           </ngx-datatable-column>
 

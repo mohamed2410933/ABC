@@ -33,7 +33,7 @@
             <ngx-datatable style="height: calc(160vh - 270px); box-shadow: none" [columnMode]="'force'" [headerHeight]="50"
               [footerHeight]="50"  [rowHeight]="'auto'"  [scrollbarV]="true" [virtualization]="false" #table
               [limit]="pageData?.per_page" 
-              [rows]="clientsSalesList" class="material" 
+              [rows]="clientsSalesList | fillter:filterData" class="material" 
              
               [count]="pageData?.total" [offset]="pageData?.current_page - 1"
              
@@ -96,7 +96,7 @@
                   تاريخ الإنشاء
                 </ng-template>
                 <ng-template let-value="value" let-row="row" ngx-datatable-cell-template>
-                  {{row.created_at | date }}
+                  {{row.created_at | date : 'MMM d, y, h:mm a' }}
                 </ng-template>
               </ngx-datatable-column>
               <ngx-datatable-column name="name" >

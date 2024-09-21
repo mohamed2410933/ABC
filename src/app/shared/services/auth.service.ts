@@ -13,7 +13,7 @@ export class AuthService {
   authenticated = true;
   // public apiUrl = 'https://abctdawltest.pro-erp.site/public/api/';
   // public apiUrl = 'https://abctdawltest.nodev.store/public/api/';
-  public apiUrl = 'http://backendcrm.abctadawul.com/api/';
+  public apiUrl = 'https://backendcrm.abctadawul.com/api/';
 
 
 
